@@ -17,6 +17,12 @@
 
 <p align="center"><img src="docs/screenshots/hero.png" alt="Resurface landing page" width="100%"></p>
 
+## Launch video
+
+<a href="docs/launch/resurface-launch.mp4"><img src="docs/launch/poster-hook.jpg" alt="Watch the Resurface launch video" width="360"></a>
+
+▶ **[Watch the 57-second launch video](docs/launch/resurface-launch.mp4)**. It was made in code with Remotion, with an ElevenLabs voiceover. Source in [`video/`](video).
+
 ## Why a classifier, not an LLM
 
 Screening a resume against a job is a **decision**, not an essay. We ran the same 20 resumes through the same screening questions twice, with a System One classification model and with two general LLMs (`scripts/benchmark.mts`):

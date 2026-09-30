@@ -46,3 +46,8 @@ next-env.d.ts
 /data/uploads
 !.env.example
 .claude/settings.local.json
+
+# remotion
+/video/node_modules
+/video/out
+/video/LINKEDIN_POST.md
