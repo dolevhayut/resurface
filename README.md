@@ -1,47 +1,92 @@
-# CVLeap — Talent Engine MVP
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="brand/resurface-logo-white.svg">
+    <img src="brand/resurface-logo.svg" alt="Resurface" width="360">
+  </picture>
+</p>
 
-**Turn your existing candidate database into your next shortlist.** A search layer that sits on top of an ATS: every job becomes a handful of explicit screening questions, and every resume in the pool is judged against them by TypeSafe **JEV**. Each verdict comes with the exact resume line that supports it.
+<p align="center">
+  <b>Language models write. Classification models decide.</b><br>
+  Turn the candidate database you already have into evidence-backed shortlists.<br>
+  An LLM writes the screening questions once per job. A classification model answers them for every resume, and quotes the exact line that proves each answer.
+</p>
 
-Built from `Talent-Engine-Handoff/01-PRD.md` (v1.0).
+<p align="center">
+  <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fdolevhayut%2Fresurface&project-name=resurface&repository-name=resurface"><img src="https://vercel.com/button" alt="Deploy with Vercel"></a>
+</p>
 
-## The demo in 60 seconds
-1. `pnpm install && pnpm dev` → http://localhost:3000 opens the **landing page**: a datasheet-style comparison of a classification model vs a general LLM for resume screening, with numbers measured by `scripts/benchmark.mts`. The dashboard lives at `/overview`.
-2. Click **Guided demo** in the sidebar for a 10-step narrated tour (Hebrew/English). In it, the Solutions Engineer job starts empty: Claude drafts 6–8 questions live, then 10 resumes stream through JEV with a score per candidate.
-3. **Overview → "Evaluate pool for all 20 jobs"**: 20 jobs × 100 resumes ≈ 2,000 JEV evaluations, ~40s, ~$0.46.
-4. Open any job → results grouped into *Strong evidence / Needs verification / Lower evidence / Not evaluated*. Click a candidate to see each question's verdict, the quoted source line (click → jumps to it in the resume), and interview checks for anything not established.
-5. **Ask the pool**: plain-English request ("an engineer who owned production on-call, even if not titled DevOps") → ranked resumes with the supporting line.
-6. **Candidate → Match to open jobs**: reverse search from one resume to every open role.
+<p align="center"><img src="docs/screenshots/landing.png" alt="Resurface landing page" width="100%"></p>
 
-## Pipeline
+## Why a classifier, not an LLM
+
+Screening a resume against a job is a **decision**, not an essay. We ran the same 20 resumes through the same screening questions twice, with a System One classification model and with two general LLMs (`scripts/benchmark.mts`):
+
+| | **TypeSafe JEV** (classifier) | Claude Sonnet 5.5 | Claude Haiku 4.5 |
+|---|---|---|---|
+| Median time per resume | **0.29 s** | 2.5 s | 1.7 s |
+| Cost per resume | **$0.00018** | $0.0057 (31×) | $0.0019 (10×) |
+| Verdicts identical to Sonnet 5.5 | **99%** | — | 93% |
+| Same answer on a re-run | **100%** | 100% | 98% |
+| 185,000 resumes × 20 jobs | **≈ $680** | ≈ $21,000 | ≈ $7,100 |
+| Output | one of *your* options, plus a probability | generated text / JSON | generated text / JSON |
+| Evidence | picks a resume line ID, so the quote is copied and can't be invented | writes the quote | writes the quote |
+
+**New challenger:** on 29 Sep 2026 OpenAI announced a *Decisions API* built on GPT-6 Luna (limited preview, ~150 ms claimed). It has no public endpoint, schema or pricing yet, so it isn't in the table. It will be added the day it can be measured with the same script.
+
+On this sample the LLMs were accurate too. The difference is cost, speed, and guarantees that come from the design instead of from verification. LLMs still do the part they're best at here: turning a job post into 6–8 atomic questions, once per job. *A small synthetic benchmark: directional, not a certification.*
+
+## How it works
+
 ```
-Job description ──LLM──▶ 6 atomic questions (each tied to a verbatim JD span, reviewed & approved)
-                          │  frozen rubric version + candidate snapshot
-Resume (lines L000…) ─────┴─JEV─▶ per question: Choice SUPPORTED / CONTRADICTED / INSUFFICIENT_EVIDENCE
-                                                + Choice over line ids → exact evidence quote
-                             code ▶ years-of-experience computed from dates (overlaps merged)
-                             code ▶ score = weight backed by quoted evidence ÷ total, coverage, range
+Job description ──LLM (1 call per job)──▶ 6–8 atomic questions, each tied to a verbatim line of the posting
+                                          │  recruiter reviews & approves → frozen rubric version
+Every resume ──classifier (1 call each)───┴─▶ per question: SUPPORTED / CONTRADICTED / INSUFFICIENT_EVIDENCE
+                                              + the resume line that proves it (selected, never generated)
+code ▶ years of experience from dates (overlaps merged) · score = weight backed by quotes ÷ total · coverage
 ```
-- One JEV request per resume answers all questions (verdict + evidence line for each). Larger rubrics (>8) cascade: must-haves for everyone first, the rest for candidates who advance.
-- Evidence is *selected*, not generated: it's always a verbatim resume line, so citations can't be hallucinated.
-- Missing information never counts as a failure. Evaluator confidence stays in the details view and is never shown as a match %.
-- Resumes are untrusted input (a prompt-injection CV is included in the demo set and scores low). Contact details are redacted before evaluation.
 
-## Data
-- `data/seed/seed.json`: **100 fictional resumes** (20 job families, with strong, semantic-only, partial and career-changer profiles, plus a Hebrew CV, an undated CV and a prompt-injection CV), **20 job descriptions**, and **6 pre-drafted questions per job** so the demo runs without an LLM key. Regenerate with `pnpm seed`.
-- `data/db.json`: local state (runs, evaluations, shortlists, audit). Delete it or use *Settings → Reset demo data* to start over.
+<table>
+  <tr>
+    <td><img src="docs/screenshots/results.png" alt="Results grouped by evidence"></td>
+    <td><img src="docs/screenshots/evidence.png" alt="Evidence drawer with exact quotes"></td>
+  </tr>
+</table>
 
-## Keys
-See `.env.example`. `TYPESAFE_API_KEY` enables JEV (otherwise an offline keyword heuristic is used and labelled as such). `ANTHROPIC_API_KEY` or `AI_GATEWAY_API_KEY` enables live LLM question drafting for new jobs.
+## What's inside
 
-## What's implemented from the PRD
-Import (PDF/DOCX/TXT/CSV, dedup by content hash, versioning by email, parse failures kept separate) · editable rubric with source spans, must/nice, weights, flagged manual/protected criteria, approve-to-freeze + duplicate-to-edit · run preview with cost estimate and budget cap · durable-style orchestration (task states, leases, idempotency keys, retry with backoff + jitter, per-task checkpoints, pause/resume/cancel/retry-failed, fair global concurrency) · provisional results with coverage counter · re-weighting without re-evaluation · evidence drawer, compare (up to 3), shortlist, "not a match" feedback · CSV export · tombstone deletion · role-based permissions (admin / recruiter / hiring manager) · audit log · usage metering.
+- **Guided demo:** a narrated 10-step tour (Hebrew/English). A job with no candidates gets its questions drafted live, then 10 resumes stream through the classifier, each with a score.
+- **Evidence-first results:** candidates are grouped into Strong evidence / Needs verification / Lower / Not evaluated. The evidence drawer jumps to each source line. Anything unproven turns into an interview check, and missing information never counts as a rejection.
+- **Ask the pool:** plain-language requests ("owned production on-call, even if not titled DevOps") are run against every resume.
+- **Reverse match:** check one resume against every open job.
+- **Runs:** frozen rubric versions and candidate snapshots, staged cascade for larger rubrics, retries with backoff, pause/resume/cancel, budget cap, idempotency keys.
+- **Import:** PDF, DOCX, TXT and CSV, with de-duplication by content hash and versioning by email.
+- **Recruiter tools:** shortlists, compare up to 3, CSV export, roles (admin / recruiter / hiring manager), audit log, usage metering.
+- **Safety:** resumes are treated as untrusted input (a prompt-injection CV is included in the demo set), contact details are redacted before evaluation, and questions that touch protected attributes are flagged.
+- **Demo data:** 100 fictional resumes and 20 jobs, plus precomputed classifier results so a fresh deploy is never empty.
 
-**MVP simplifications:** a single-process JSON store plus in-process worker stand in for the planned Postgres + Redis/BullMQ + separate worker (the entity shapes match PRD §10). Auth is a role switcher. There's no OCR and no ATS connector.
+## Run it
+
+```bash
+pnpm install
+cp .env.example .env.local   # optional keys, see below
+pnpm dev                     # http://localhost:3000 → landing; /overview → app
+```
+
+| Variable | What it enables |
+|---|---|
+| `TYPESAFE_API_KEY` | Live evaluation with TypeSafe **JEV** ([docs](https://docs.typesafe.ai)). Without it, an offline keyword heuristic is used, and labelled as such everywhere. |
+| `ANTHROPIC_API_KEY` or `AI_GATEWAY_API_KEY` | Live LLM drafting of questions for new jobs. Without it, the classifier marks each job-description line as must / nice / not a requirement instead. |
+
+No key is required to deploy: the demo ships with real precomputed results for 19 jobs.
+
+**Scripts:** `pnpm seed` regenerates demo data · `pnpm snapshot` bakes completed runs into the seed · `pnpm benchmark` re-runs the model comparison (needs both keys).
+
+### Deploy notes
+The Vercel deployment is a **single-instance demo**: state lives in `/tmp` and resets on a cold start, and run progress is driven by the polling requests. For production, swap the JSON store for Postgres and the in-process worker for a durable queue. The store's entity shapes already mirror that design (`src/lib/types.ts`).
 
 ## Stack
-Next.js 16 (App Router) · React 19 · Tailwind v4 · motion · Phosphor icons · `@typesafe-ai/sdk` · AI SDK. Pine/Lemon palette, Geist + Noto Sans Hebrew, light + dark.
+Next.js 16 · React 19 · Tailwind v4 · motion · Phosphor icons · `@typesafe-ai/sdk` · AI SDK · Anthropic.
+Motion primitives adapted from [21st.dev](https://21st.dev) (ibelick, cnippet-dev). Imagery and logo generated with fal (Nano Banana 2).
 
-## Benchmark (JEV vs LLMs)
-`npx tsx --env-file=.env.local scripts/benchmark.mts` runs 20 resumes × 5 questions × 2 runs through TypeSafe JEV, Claude Sonnet 5.5 and Claude Haiku 4.5, and writes `data/benchmark.json` (the landing page reads it). Last run: JEV 292 ms / $0.00018 per resume, 99% verdict agreement with Sonnet 5.5; Sonnet 2.5 s / $0.0057; Haiku 1.7 s / $0.0019, 93% agreement. This is a small synthetic sample: treat it as directional.
-
-Landing imagery was generated with fal (Nano Banana 2) and lives in `public/landing/`.
+## License
+MIT. All people and companies in the demo data are fictional.

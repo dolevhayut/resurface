@@ -338,6 +338,17 @@ function scheduleStage2(run: Run, task: Task, stage1: CriterionResult[]) {
   d.tasks.push(t2);
 }
 
+/** Serverless: advance the queue inside the polling request, so runs finish without a long-lived worker. */
+export async function drive(maxMs = 5000) {
+  ensureWorker();
+  if (!process.env.VERCEL) return;
+  const until = Date.now() + maxMs;
+  while (Date.now() < until && db().runs.some((r) => r.status === "running")) {
+    tick();
+    await new Promise((r) => setTimeout(r, 150));
+  }
+}
+
 // ---------- read models ----------
 
 export type CandidateStatus = "pending" | "partial" | "done" | "failed" | "not_evaluated" | "pruned";

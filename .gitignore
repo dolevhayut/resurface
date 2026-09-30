@@ -45,3 +45,4 @@ next-env.d.ts
 /data/db.json.tmp
 /data/uploads
 !.env.example
+.claude/settings.local.json

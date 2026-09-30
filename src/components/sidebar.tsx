@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import clsx from "clsx";
+import { BrandMark } from "./brand-mark";
 import { motion } from "motion/react";
 import { Icon, type IconName } from "./icons";
 import { AnimatedBackground, spring } from "./motion";
@@ -20,12 +21,9 @@ export function Logo() {
   return (
     <span className="flex items-center gap-2.5 text-[15px] font-semibold tracking-[-0.02em]">
       <motion.span whileHover={{ rotate: -8, scale: 1.06 }} transition={spring} className="grid size-7 place-items-center rounded-[9px] bg-pine text-on-pine shadow-[inset_0_1px_0_rgba(255,255,255,.25)]">
-        <svg viewBox="0 0 16 16" className="size-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M2.5 12 6.5 4.5l2.3 4.2L10.6 6.5 13.5 12" />
-          <circle cx="11.2" cy="3.2" r="1.35" fill="var(--lemon)" stroke="none" />
-        </svg>
+        <BrandMark className="size-[18px]" />
       </motion.span>
-      CVLeap
+      Resurface
     </span>
   );
 }

@@ -1,9 +1,10 @@
 import { db, TENANT } from "@/lib/store";
-import { runProgress, runResults } from "@/lib/runner";
+import { drive, runProgress, runResults } from "@/lib/runner";
 import { handle } from "@/lib/session";
 
 // Re-weighting reranks stored judgments without calling the provider again (PRD §8).
 export const GET = handle(async (req: Request, ctx: RouteContext<"/api/runs/[id]/results">) => {
+  await drive(2500);
   const { id } = await ctx.params;
   const run = db().runs.find((r) => r.id === id && r.tenantId === TENANT);
   if (!run) throw new Error("Not found");

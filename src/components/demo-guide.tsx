@@ -28,8 +28,8 @@ const STEPS: Step[] = [
     target: "hero",
     title: { he: "המאגר הרדום שלכם", en: "Your dormant database" },
     body: {
-      he: "לכל ארגון יש אלפי קורות חיים שנאספו לאורך שנים — ואף אחד לא באמת מחפש בהם. CVLeap יושב מעל ה־ATS הקיים והופך את המאגר הזה לרשימות התאמה מבוססות ראיות.",
-      en: "Every company has thousands of resumes collected over years — and nobody really searches them. CVLeap sits on top of the existing ATS and turns that pool into evidence-backed shortlists.",
+      he: "לכל ארגון יש אלפי קורות חיים שנאספו לאורך שנים — ואף אחד לא באמת מחפש בהם. Resurface יושב מעל ה־ATS הקיים והופך את המאגר הזה לרשימות התאמה מבוססות ראיות.",
+      en: "Every company has thousands of resumes collected over years — and nobody really searches them. Resurface sits on top of the existing ATS and turns that pool into evidence-backed shortlists.",
     },
   },
   {

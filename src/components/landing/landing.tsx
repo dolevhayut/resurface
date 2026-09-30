@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import clsx from "clsx";
+import { BrandMark } from "../brand-mark";
 import { AnimatePresence, motion, useInView, useScroll, useSpring, useTransform } from "motion/react";
 import { Icon } from "../icons";
 import { AnimatedNumber } from "../motion";
@@ -66,7 +67,7 @@ function Typewriter({ text, play, className }: { text: string; play: boolean; cl
   );
 }
 
-type Winner = "jev" | "llm" | "tie" | "both";
+type Winner = "jev" | "llm" | "tie" | "both" | "pending";
 type Row = {
   id: string;
   group: string;
@@ -317,8 +318,34 @@ export function Landing({ bench }: { bench: Bench }) {
         ),
       },
       {
+        id: "openai",
+        group: "06 · New challenger",
+        spec: "OpenAI Decisions API",
+        hint: "Announced at DevDay, 29 Sep 2026. Powered by GPT-6 Luna, OpenAI’s cheapest LLM.",
+        llm: { v: "An LLM in a classifier costume", note: "limited preview · ~150 ms claimed by OpenAI · no public endpoint, schema, pricing or probability semantics yet" },
+        jev: { v: "A dedicated decision model", note: `generally available · ${ms(jev.p50ms)} measured here, end to end, 10 answers per call` },
+        winner: "pending",
+        specimen: () => (
+          <div className="grid gap-3 md:grid-cols-2">
+            <Panel label="What was announced" tone="llm">
+              <ul className="space-y-1.5 text-[13px] leading-6 text-muted">
+                <li>Define a question and a bounded set of answers; get a classified answer with a confidence score.</li>
+                <li>Built on GPT-6 Luna, a general LLM, rather than a model trained for decisions.</li>
+                <li>Latency and cost claims come from the vendor; the preview has no public contract to test against.</li>
+              </ul>
+            </Panel>
+            <Panel label="Our position" tone="jev">
+              <p className="text-[13px] leading-6 text-muted">
+                Imitation is the sincerest form of flattery: the biggest LLM lab now agrees that screening is a <em className="font-serif text-[1.1em] text-fg">decision</em> problem. We’ll add it to the benchmark the day it has an endpoint — same resumes, same questions, same
+                script.
+              </p>
+            </Panel>
+          </div>
+        ),
+      },
+      {
         id: "draft",
-        group: "06 · Where LLMs win",
+        group: "07 · Where LLMs win",
         spec: "Turning a job post into questions",
         hint: "Open-ended reading and writing — once per job.",
         llm: { v: "Excellent", note: "Claude drafts 6–8 atomic questions in seconds" },
@@ -333,7 +360,7 @@ export function Landing({ bench }: { bench: Bench }) {
       },
       {
         id: "both",
-        group: "06 · Where LLMs win",
+        group: "07 · Where LLMs win",
         spec: "The architecture",
         hint: "Use each model for what it is.",
         llm: { v: "1 call per job", note: "writes the questions" },
@@ -377,12 +404,9 @@ function Nav() {
       <div className="mx-auto flex h-14 max-w-[1280px] items-center justify-between px-4 md:px-8">
         <Link href="/" className="flex items-center gap-2.5 text-[15px] font-semibold tracking-[-0.02em]">
           <span className="grid size-7 place-items-center rounded-[9px] bg-pine text-on-pine">
-            <svg viewBox="0 0 16 16" className="size-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M2.5 12 6.5 4.5l2.3 4.2L10.6 6.5 13.5 12" />
-              <circle cx="11.2" cy="3.2" r="1.35" fill="var(--lemon)" stroke="none" />
-            </svg>
+            <BrandMark className="size-[18px]" />
           </span>
-          CVLeap
+          Resurface
         </Link>
         <span className="hidden font-mono text-[11px] uppercase tracking-[0.16em] text-faint md:block">Datasheet Nº 01 — Screening models</span>
         <div className="flex items-center gap-2">
@@ -428,7 +452,7 @@ function Hero({ bench, speed, cheaper }: { bench: Bench; speed: number; cheaper:
             ))}
           </h1>
           <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }} className="mt-7 max-w-xl text-[16px] leading-7 text-muted">
-            Screening a resume against a job is a <em className="font-serif text-[1.15em] text-fg">decision</em>, not an essay. CVLeap asks an LLM to write the questions once — then a System One classification model answers them for every resume in your database, with the exact line that proves it.
+            Screening a resume against a job is a <em className="font-serif text-[1.15em] text-fg">decision</em>, not an essay. Resurface asks an LLM to write the questions once — then a System One classification model answers them for every resume in your database, with the exact line that proves it.
           </motion.p>
           <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1 }} className="mt-8 flex flex-wrap gap-2">
             <a href="#sheet" className="btn-primary h-11 px-5 text-[14px]">
@@ -623,6 +647,7 @@ const VERDICT: Record<Winner, { t: string; c: string }> = {
   llm: { t: "LLM", c: "bg-lemon text-[#15201b]" },
   tie: { t: "Tie", c: "bg-subtle text-fg" },
   both: { t: "Use both", c: "bg-fg text-bg" },
+  pending: { t: "Pending", c: "border border-dashed border-control text-muted" },
 };
 
 function SheetRow({ r, open, dim, onToggle, onHover }: { r: Row; open: boolean; dim: boolean; onToggle: () => void; onHover: (id: string | null) => void }) {
@@ -825,7 +850,7 @@ function Footer() {
               Watch a job get screened live
             </Link>
           </div>
-          <span className="font-mono text-[11px] text-faint">CVLeap · working name · all people & companies in the demo are fictional</span>
+          <span className="font-mono text-[11px] text-faint">Resurface · working name · all people & companies in the demo are fictional</span>
         </div>
       </div>
     </footer>

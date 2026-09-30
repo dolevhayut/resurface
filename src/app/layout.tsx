@@ -8,7 +8,7 @@ const hebrew = Noto_Sans_Hebrew({ variable: "--font-hebrew", subsets: ["hebrew"]
 const serif = Instrument_Serif({ variable: "--font-instrument", subsets: ["latin"], weight: "400", style: ["normal", "italic"] });
 
 export const metadata: Metadata = {
-  title: "CVLeap — Rediscover your talent",
+  title: "Resurface — Rediscover your talent",
   description: "Turn your existing candidate database into your next shortlist.",
 };
 

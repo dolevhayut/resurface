@@ -1,5 +1,5 @@
 {
-  "name": "cvleap",
+  "name": "resurface",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "seed": "tsx scripts/generate-seed.ts",
-    "reset": "rm -f data/db.json"
+    "reset": "rm -f data/db.json",
+    "snapshot": "tsx scripts/snapshot-seed.mts",
+    "benchmark": "tsx --env-file=.env.local scripts/benchmark.mts"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^4.0.70",
@@ -39,5 +41,12 @@
     "tsx": "^4.23.15",
     "typescript": "^5"
   },
-  "packageManager": "pnpm@10.13.1"
+  "packageManager": "pnpm@10.13.1",
+  "description": "Resurface your dormant candidate database: an LLM writes the screening questions once, a classification model (TypeSafe JEV) answers them for every resume — with the exact line that proves it.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dolevhayut/resurface.git"
+  },
+  "homepage": "https://github.com/dolevhayut/resurface"
 }

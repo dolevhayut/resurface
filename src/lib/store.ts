@@ -10,9 +10,10 @@ import type { DB } from "./types";
 
 export const TENANT = "org_demo";
 
-const DATA_DIR = path.join(process.cwd(), "data");
+// On Vercel the deployment filesystem is read-only: state lives in /tmp and is re-seeded on a cold start.
+const DATA_DIR = process.env.VERCEL ? "/tmp/resurface" : path.join(process.cwd(), "data");
 const DB_FILE = path.join(DATA_DIR, "db.json");
-const SEED_DIR = path.join(DATA_DIR, "seed");
+const SEED_DIR = path.join(process.cwd(), "data", "seed");
 
 type G = typeof globalThis & { __cvleapDb?: DB; __cvleapSaveTimer?: NodeJS.Timeout };
 const g = globalThis as G;
