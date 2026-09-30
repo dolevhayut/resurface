@@ -15,7 +15,7 @@
   <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fdolevhayut%2Fresurface&project-name=resurface&repository-name=resurface"><img src="https://vercel.com/button" alt="Deploy with Vercel"></a>
 </p>
 
-<p align="center"><img src="docs/screenshots/landing.png" alt="Resurface landing page" width="100%"></p>
+<p align="center"><img src="docs/screenshots/hero.png" alt="Resurface landing page" width="100%"></p>
 
 ## Why a classifier, not an LLM
 
