@@ -5,11 +5,12 @@
 Built from `Talent-Engine-Handoff/01-PRD.md` (v1.0).
 
 ## The demo in 60 seconds
-1. `pnpm install && pnpm dev` → http://localhost:3000
-2. **Overview → "Evaluate pool for all 20 jobs"**: 20 jobs × 100 resumes ≈ 2,000 JEV evaluations, ~40s, ~$0.46.
-3. Open any job → results grouped into *Strong evidence / Needs verification / Lower evidence / Not evaluated*. Click a candidate to see each question's verdict, the quoted source line (click → jumps to it in the resume), and interview checks for anything not established.
-4. **Ask the pool**: plain-English request ("an engineer who owned production on-call, even if not titled DevOps") → ranked resumes with the supporting line.
-5. **Candidate → Match to open jobs**: reverse search from one resume to every open role.
+1. `pnpm install && pnpm dev` → http://localhost:3000 opens the **landing page**: a datasheet-style comparison of a classification model vs a general LLM for resume screening, with numbers measured by `scripts/benchmark.mts`. The dashboard lives at `/overview`.
+2. Click **Guided demo** in the sidebar for a 10-step narrated tour (Hebrew/English). In it, the Solutions Engineer job starts empty: Claude drafts 6–8 questions live, then 10 resumes stream through JEV with a score per candidate.
+3. **Overview → "Evaluate pool for all 20 jobs"**: 20 jobs × 100 resumes ≈ 2,000 JEV evaluations, ~40s, ~$0.46.
+4. Open any job → results grouped into *Strong evidence / Needs verification / Lower evidence / Not evaluated*. Click a candidate to see each question's verdict, the quoted source line (click → jumps to it in the resume), and interview checks for anything not established.
+5. **Ask the pool**: plain-English request ("an engineer who owned production on-call, even if not titled DevOps") → ranked resumes with the supporting line.
+6. **Candidate → Match to open jobs**: reverse search from one resume to every open role.
 
 ## Pipeline
 ```
@@ -39,3 +40,8 @@ Import (PDF/DOCX/TXT/CSV, dedup by content hash, versioning by email, parse fail
 
 ## Stack
 Next.js 16 (App Router) · React 19 · Tailwind v4 · motion · Phosphor icons · `@typesafe-ai/sdk` · AI SDK. Pine/Lemon palette, Geist + Noto Sans Hebrew, light + dark.
+
+## Benchmark (JEV vs LLMs)
+`npx tsx --env-file=.env.local scripts/benchmark.mts` runs 20 resumes × 5 questions × 2 runs through TypeSafe JEV, Claude Sonnet 5.5 and Claude Haiku 4.5, and writes `data/benchmark.json` (the landing page reads it). Last run: JEV 292 ms / $0.00018 per resume, 99% verdict agreement with Sonnet 5.5; Sonnet 2.5 s / $0.0057; Haiku 1.7 s / $0.0019, 93% agreement. This is a small synthetic sample: treat it as directional.
+
+Landing imagery was generated with fal (Nano Banana 2) and lives in `public/landing/`.

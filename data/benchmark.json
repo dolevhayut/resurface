@@ -1,0 +1,562 @@
+{
+ "at": "2026-09-30T20:43:42.078Z",
+ "job": "Senior Full Stack Engineer",
+ "questions": [
+  "Has the candidate built production front-end applications with React (including React frameworks such as Next.js)?",
+  "Has the candidate built backend services running on Node.js (e.g. Express, NestJS)?",
+  "Has the candidate designed or evolved relational database schemas (PostgreSQL or MySQL)?",
+  "Has the candidate deployed and operated services on AWS or GCP?",
+  "Has the candidate worked on a B2B SaaS product or explicitly led a technical project or mentored engineers?"
+ ],
+ "results": [
+  {
+   "key": "jev",
+   "label": "TypeSafe JEV (classification model)",
+   "resumes": 20,
+   "questions": 5,
+   "runs": 2,
+   "failures": 0,
+   "p50ms": 292,
+   "p95ms": 523,
+   "wallMs": 2723,
+   "tokensPerResume": 4388,
+   "usdPerResume": 0.0001843002,
+   "usdPer185kx20": 681.91074,
+   "consistency": 1,
+   "quotes": 76,
+   "quoteValidity": 1,
+   "injectionSupported": [
+    0,
+    0
+   ],
+   "sampleOutput": {
+    "verdicts": {
+     "react_in_production": "INSUFFICIENT_EVIDENCE",
+     "node_js_backend_services": "INSUFFICIENT_EVIDENCE",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "INSUFFICIENT_EVIDENCE"
+    },
+    "quotes": {
+     "react_in_production": null,
+     "node_js_backend_services": null,
+     "relational_schema_design": null,
+     "cloud_production_ops": null,
+     "b2b_saas_tech_leadership": null
+    },
+    "ms": 284.016625,
+    "input": 2439,
+    "output": 1033
+   },
+   "firstRun": [
+    {
+     "react_in_production": "SUPPORTED",
+     "node_js_backend_services": "SUPPORTED",
+     "relational_schema_design": "SUPPORTED",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "SUPPORTED"
+    },
+    {
+     "react_in_production": "SUPPORTED",
+     "node_js_backend_services": "SUPPORTED",
+     "relational_schema_design": "SUPPORTED",
+     "cloud_production_ops": "SUPPORTED",
+     "b2b_saas_tech_leadership": "SUPPORTED"
+    },
+    {
+     "react_in_production": "SUPPORTED",
+     "node_js_backend_services": "SUPPORTED",
+     "relational_schema_design": "SUPPORTED",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "SUPPORTED"
+    },
+    {
+     "react_in_production": "SUPPORTED",
+     "node_js_backend_services": "SUPPORTED",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "SUPPORTED",
+     "b2b_saas_tech_leadership": "SUPPORTED"
+    },
+    {
+     "react_in_production": "INSUFFICIENT_EVIDENCE",
+     "node_js_backend_services": "SUPPORTED",
+     "relational_schema_design": "SUPPORTED",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "SUPPORTED"
+    },
+    {
+     "react_in_production": "SUPPORTED",
+     "node_js_backend_services": "SUPPORTED",
+     "relational_schema_design": "SUPPORTED",
+     "cloud_production_ops": "SUPPORTED",
+     "b2b_saas_tech_leadership": "SUPPORTED"
+    },
+    {
+     "react_in_production": "SUPPORTED",
+     "node_js_backend_services": "SUPPORTED",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "SUPPORTED"
+    },
+    {
+     "react_in_production": "INSUFFICIENT_EVIDENCE",
+     "node_js_backend_services": "INSUFFICIENT_EVIDENCE",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "SUPPORTED"
+    },
+    {
+     "react_in_production": "INSUFFICIENT_EVIDENCE",
+     "node_js_backend_services": "INSUFFICIENT_EVIDENCE",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+     "react_in_production": "SUPPORTED",
+     "node_js_backend_services": "INSUFFICIENT_EVIDENCE",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+     "react_in_production": "SUPPORTED",
+     "node_js_backend_services": "INSUFFICIENT_EVIDENCE",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+     "react_in_production": "SUPPORTED",
+     "node_js_backend_services": "INSUFFICIENT_EVIDENCE",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+     "react_in_production": "INSUFFICIENT_EVIDENCE",
+     "node_js_backend_services": "INSUFFICIENT_EVIDENCE",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+     "react_in_production": "SUPPORTED",
+     "node_js_backend_services": "INSUFFICIENT_EVIDENCE",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+     "react_in_production": "SUPPORTED",
+     "node_js_backend_services": "INSUFFICIENT_EVIDENCE",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+     "react_in_production": "INSUFFICIENT_EVIDENCE",
+     "node_js_backend_services": "INSUFFICIENT_EVIDENCE",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+     "react_in_production": "INSUFFICIENT_EVIDENCE",
+     "node_js_backend_services": "INSUFFICIENT_EVIDENCE",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+     "react_in_production": "INSUFFICIENT_EVIDENCE",
+     "node_js_backend_services": "INSUFFICIENT_EVIDENCE",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+     "react_in_production": "INSUFFICIENT_EVIDENCE",
+     "node_js_backend_services": "INSUFFICIENT_EVIDENCE",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+     "react_in_production": "SUPPORTED",
+     "node_js_backend_services": "SUPPORTED",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "SUPPORTED",
+     "b2b_saas_tech_leadership": "SUPPORTED"
+    }
+   ],
+   "agreementWithSonnet": 0.99
+  },
+  {
+   "key": "claude-haiku-4-5",
+   "label": "Claude Haiku 4.5 (small general LLM)",
+   "resumes": 20,
+   "questions": 5,
+   "runs": 2,
+   "failures": 0,
+   "p50ms": 1667,
+   "p95ms": 2412,
+   "wallMs": 18348,
+   "tokensPerResume": 1214,
+   "usdPerResume": 0.0019167000000000001,
+   "usdPer185kx20": 7091.790000000001,
+   "consistency": 0.98,
+   "quotes": 84,
+   "quoteValidity": 1,
+   "injectionSupported": [
+    0,
+    0
+   ],
+   "sampleOutput": {
+    "verdicts": {
+     "react_in_production": "INSUFFICIENT_EVIDENCE",
+     "node_js_backend_services": "INSUFFICIENT_EVIDENCE",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "INSUFFICIENT_EVIDENCE"
+    },
+    "quotes": {
+     "react_in_production": null,
+     "node_js_backend_services": null,
+     "relational_schema_design": null,
+     "cloud_production_ops": null,
+     "b2b_saas_tech_leadership": null
+    },
+    "ms": 1319.7706660000003,
+    "input": 851,
+    "output": 151
+   },
+   "firstRun": [
+    {
+     "react_in_production": "SUPPORTED",
+     "node_js_backend_services": "SUPPORTED",
+     "relational_schema_design": "SUPPORTED",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "SUPPORTED"
+    },
+    {
+     "react_in_production": "SUPPORTED",
+     "node_js_backend_services": "SUPPORTED",
+     "relational_schema_design": "SUPPORTED",
+     "cloud_production_ops": "SUPPORTED",
+     "b2b_saas_tech_leadership": "SUPPORTED"
+    },
+    {
+     "react_in_production": "SUPPORTED",
+     "node_js_backend_services": "SUPPORTED",
+     "relational_schema_design": "SUPPORTED",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "SUPPORTED"
+    },
+    {
+     "react_in_production": "SUPPORTED",
+     "node_js_backend_services": "SUPPORTED",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "SUPPORTED",
+     "b2b_saas_tech_leadership": "SUPPORTED"
+    },
+    {
+     "react_in_production": "INSUFFICIENT_EVIDENCE",
+     "node_js_backend_services": "SUPPORTED",
+     "relational_schema_design": "SUPPORTED",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "SUPPORTED"
+    },
+    {
+     "react_in_production": "SUPPORTED",
+     "node_js_backend_services": "SUPPORTED",
+     "relational_schema_design": "SUPPORTED",
+     "cloud_production_ops": "SUPPORTED",
+     "b2b_saas_tech_leadership": "SUPPORTED"
+    },
+    {
+     "react_in_production": "SUPPORTED",
+     "node_js_backend_services": "SUPPORTED",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "SUPPORTED"
+    },
+    {
+     "react_in_production": "INSUFFICIENT_EVIDENCE",
+     "node_js_backend_services": "INSUFFICIENT_EVIDENCE",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "SUPPORTED"
+    },
+    {
+     "react_in_production": "INSUFFICIENT_EVIDENCE",
+     "node_js_backend_services": "INSUFFICIENT_EVIDENCE",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+     "react_in_production": "SUPPORTED",
+     "node_js_backend_services": "INSUFFICIENT_EVIDENCE",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "SUPPORTED"
+    },
+    {
+     "react_in_production": "SUPPORTED",
+     "node_js_backend_services": "INSUFFICIENT_EVIDENCE",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "SUPPORTED"
+    },
+    {
+     "react_in_production": "SUPPORTED",
+     "node_js_backend_services": "INSUFFICIENT_EVIDENCE",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "SUPPORTED"
+    },
+    {
+     "react_in_production": "INSUFFICIENT_EVIDENCE",
+     "node_js_backend_services": "CONTRADICTED",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "SUPPORTED"
+    },
+    {
+     "react_in_production": "SUPPORTED",
+     "node_js_backend_services": "INSUFFICIENT_EVIDENCE",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+     "react_in_production": "SUPPORTED",
+     "node_js_backend_services": "INSUFFICIENT_EVIDENCE",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+     "react_in_production": "INSUFFICIENT_EVIDENCE",
+     "node_js_backend_services": "INSUFFICIENT_EVIDENCE",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+     "react_in_production": "INSUFFICIENT_EVIDENCE",
+     "node_js_backend_services": "INSUFFICIENT_EVIDENCE",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "SUPPORTED"
+    },
+    {
+     "react_in_production": "INSUFFICIENT_EVIDENCE",
+     "node_js_backend_services": "INSUFFICIENT_EVIDENCE",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+     "react_in_production": "INSUFFICIENT_EVIDENCE",
+     "node_js_backend_services": "INSUFFICIENT_EVIDENCE",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+     "react_in_production": "SUPPORTED",
+     "node_js_backend_services": "SUPPORTED",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "SUPPORTED",
+     "b2b_saas_tech_leadership": "SUPPORTED"
+    }
+   ],
+   "agreementWithSonnet": 0.93
+  },
+  {
+   "key": "claude-sonnet-5-5",
+   "label": "Claude Sonnet 5.5 (general LLM)",
+   "resumes": 20,
+   "questions": 5,
+   "runs": 2,
+   "failures": 0,
+   "p50ms": 2454,
+   "p95ms": 3841,
+   "wallMs": 23125,
+   "tokensPerResume": 1739,
+   "usdPerResume": 0.00570765,
+   "usdPer185kx20": 21118.305,
+   "consistency": 1,
+   "quotes": 74,
+   "quoteValidity": 1,
+   "injectionSupported": [
+    0,
+    0
+   ],
+   "sampleOutput": {
+    "verdicts": {
+     "react_in_production": "INSUFFICIENT_EVIDENCE",
+     "node_js_backend_services": "INSUFFICIENT_EVIDENCE",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "INSUFFICIENT_EVIDENCE"
+    },
+    "quotes": {
+     "react_in_production": null,
+     "node_js_backend_services": null,
+     "relational_schema_design": null,
+     "cloud_production_ops": null,
+     "b2b_saas_tech_leadership": null
+    },
+    "ms": 2462.727666999999,
+    "input": 1228,
+    "output": 241
+   },
+   "firstRun": [
+    {
+     "react_in_production": "SUPPORTED",
+     "node_js_backend_services": "SUPPORTED",
+     "relational_schema_design": "SUPPORTED",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "SUPPORTED"
+    },
+    {
+     "react_in_production": "SUPPORTED",
+     "node_js_backend_services": "SUPPORTED",
+     "relational_schema_design": "SUPPORTED",
+     "cloud_production_ops": "SUPPORTED",
+     "b2b_saas_tech_leadership": "SUPPORTED"
+    },
+    {
+     "react_in_production": "SUPPORTED",
+     "node_js_backend_services": "SUPPORTED",
+     "relational_schema_design": "SUPPORTED",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "SUPPORTED"
+    },
+    {
+     "react_in_production": "SUPPORTED",
+     "node_js_backend_services": "SUPPORTED",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "SUPPORTED",
+     "b2b_saas_tech_leadership": "SUPPORTED"
+    },
+    {
+     "react_in_production": "INSUFFICIENT_EVIDENCE",
+     "node_js_backend_services": "SUPPORTED",
+     "relational_schema_design": "SUPPORTED",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "SUPPORTED"
+    },
+    {
+     "react_in_production": "SUPPORTED",
+     "node_js_backend_services": "SUPPORTED",
+     "relational_schema_design": "SUPPORTED",
+     "cloud_production_ops": "SUPPORTED",
+     "b2b_saas_tech_leadership": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+     "react_in_production": "SUPPORTED",
+     "node_js_backend_services": "SUPPORTED",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "SUPPORTED"
+    },
+    {
+     "react_in_production": "INSUFFICIENT_EVIDENCE",
+     "node_js_backend_services": "INSUFFICIENT_EVIDENCE",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "SUPPORTED"
+    },
+    {
+     "react_in_production": "INSUFFICIENT_EVIDENCE",
+     "node_js_backend_services": "INSUFFICIENT_EVIDENCE",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+     "react_in_production": "SUPPORTED",
+     "node_js_backend_services": "INSUFFICIENT_EVIDENCE",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+     "react_in_production": "SUPPORTED",
+     "node_js_backend_services": "INSUFFICIENT_EVIDENCE",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+     "react_in_production": "SUPPORTED",
+     "node_js_backend_services": "INSUFFICIENT_EVIDENCE",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+     "react_in_production": "INSUFFICIENT_EVIDENCE",
+     "node_js_backend_services": "INSUFFICIENT_EVIDENCE",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+     "react_in_production": "SUPPORTED",
+     "node_js_backend_services": "INSUFFICIENT_EVIDENCE",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+     "react_in_production": "SUPPORTED",
+     "node_js_backend_services": "INSUFFICIENT_EVIDENCE",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+     "react_in_production": "INSUFFICIENT_EVIDENCE",
+     "node_js_backend_services": "INSUFFICIENT_EVIDENCE",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+     "react_in_production": "INSUFFICIENT_EVIDENCE",
+     "node_js_backend_services": "INSUFFICIENT_EVIDENCE",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+     "react_in_production": "INSUFFICIENT_EVIDENCE",
+     "node_js_backend_services": "INSUFFICIENT_EVIDENCE",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+     "react_in_production": "INSUFFICIENT_EVIDENCE",
+     "node_js_backend_services": "INSUFFICIENT_EVIDENCE",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "INSUFFICIENT_EVIDENCE",
+     "b2b_saas_tech_leadership": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+     "react_in_production": "SUPPORTED",
+     "node_js_backend_services": "SUPPORTED",
+     "relational_schema_design": "INSUFFICIENT_EVIDENCE",
+     "cloud_production_ops": "SUPPORTED",
+     "b2b_saas_tech_leadership": "SUPPORTED"
+    }
+   ],
+   "agreementWithSonnet": 1
+  }
+ ]
+}

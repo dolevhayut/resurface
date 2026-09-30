@@ -8,7 +8,7 @@ import { AnimatedBackground, spring } from "./motion";
 import { startDemo } from "./demo-guide";
 
 const NAV: { href: string; label: string; icon: IconName }[] = [
-  { href: "/", label: "Overview", icon: "overview" },
+  { href: "/overview", label: "Overview", icon: "overview" },
   { href: "/ask", label: "Ask the pool", icon: "ask" },
   { href: "/jobs", label: "Jobs & matches", icon: "jobs" },
   { href: "/candidates", label: "Candidates", icon: "candidates" },
@@ -33,7 +33,7 @@ export function Logo() {
 export function Sidebar({ role, name, provider }: { role: string; name: string; provider: string }) {
   const path = usePathname();
   const router = useRouter();
-  const isActive = (href: string) => (href === "/" ? path === "/" : path.startsWith(href) || (href === "/jobs" && path.startsWith("/runs")));
+  const isActive = (href: string) => (path.startsWith(href) || (href === "/jobs" && path.startsWith("/runs")));
   const active = NAV.find((n) => isActive(n.href))?.href ?? null;
   async function setRole(r: string) {
     await fetch("/api/settings", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ role: r }) });

@@ -24,7 +24,7 @@ const ASK = "An engineer who has owned production systems on-call, even if their
 const STEPS: Step[] = [
   {
     id: "intro",
-    route: "/",
+    route: "/overview",
     target: "hero",
     title: { he: "המאגר הרדום שלכם", en: "Your dormant database" },
     body: {
@@ -34,7 +34,7 @@ const STEPS: Step[] = [
   },
   {
     id: "stats",
-    route: "/",
+    route: "/overview",
     target: "stats",
     title: { he: "מה יש לנו במאגר", en: "What’s in the pool" },
     body: {
@@ -117,7 +117,7 @@ const STEPS: Step[] = [
   },
   {
     id: "end",
-    route: "/",
+    route: "/overview",
     target: "stats",
     title: { he: "שמרו את ה־ATS. גלו מחדש את הכישרונות.", en: "Keep your ATS. Rediscover your talent." },
     body: {
