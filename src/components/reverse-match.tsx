@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion } from "motion/react";
 import { Icon } from "./icons";
@@ -8,12 +8,29 @@ import type { Match } from "@/lib/scoring";
 
 type R = { jobId: string; title: string; team: string; match: Match; criteria: number };
 
-export function ReverseMatch({ candidateId, canQuery }: { candidateId: string; canQuery: boolean }) {
+export function ReverseMatch({ candidateId, canQuery, autoRun }: { candidateId: string; canQuery: boolean; autoRun?: boolean }) {
   const [busy, setBusy] = useState(false);
   const [res, setRes] = useState<{ rows: R[]; jobsWithoutRubric: number } | null>(null);
   const [err, setErr] = useState("");
+  const auto = useRef(false);
+  const run = async () => {
+    setBusy(true);
+    setErr("");
+    const r = await fetch(`/api/candidates/${candidateId}/reverse`, { method: "POST" });
+    const j = await r.json();
+    setBusy(false);
+    if (!r.ok) setErr(j.error);
+    else setRes(j);
+  };
+  useEffect(() => {
+    if (!autoRun || !canQuery || auto.current) return;
+    auto.current = true;
+     
+    void run();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoRun, canQuery]);
   return (
-    <section className="card relative overflow-hidden">
+    <section data-tour="reverse" className="card relative overflow-hidden">
       {busy && <div className="shimmer absolute inset-x-0 top-0 h-0.5" />}
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line px-4 py-3">
         <div>
@@ -23,15 +40,7 @@ export function ReverseMatch({ candidateId, canQuery }: { candidateId: string; c
         <button
           className="btn-primary"
           disabled={!canQuery || busy}
-          onClick={async () => {
-            setBusy(true);
-            setErr("");
-            const r = await fetch(`/api/candidates/${candidateId}/reverse`, { method: "POST" });
-            const j = await r.json();
-            setBusy(false);
-            if (!r.ok) setErr(j.error);
-            else setRes(j);
-          }}
+          onClick={run}
         >
           <Icon name="target" className="size-3.5" /> {busy ? "Matching…" : "Match to open jobs"}
         </button>

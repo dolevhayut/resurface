@@ -59,6 +59,7 @@ export function CandidateDrawer(props: {
         animate={{ x: 0, opacity: 1, scale: 1 }}
         exit={{ x: 48, opacity: 0, scale: 0.98 }}
         transition={{ type: "spring", stiffness: 380, damping: 36 }}
+        data-tour="drawer"
         role="dialog"
         aria-label={`${row.candidate.name} details`}
         className="fixed inset-y-2 right-2 z-50 flex w-[min(620px,calc(100vw-16px))] flex-col overflow-hidden rounded-2xl border border-line bg-surface shadow-[var(--shadow)]"

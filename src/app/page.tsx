@@ -3,6 +3,7 @@ import { Page, Stat, Meter, ago, money, tokens } from "@/components/ui";
 import { RunAllButton } from "@/components/run-all";
 import { session } from "@/lib/session";
 import { Stagger, StaggerItem } from "@/components/motion";
+import { StartDemoButton } from "@/components/start-demo";
 import { jobSummaries, poolInsights } from "@/lib/insights";
 import { db } from "@/lib/store";
 import { provider } from "@/lib/providers";
@@ -19,9 +20,10 @@ export default async function Overview() {
   const ready = jobs.filter((j) => j.rubric?.status === "approved" && !j.run);
   return (
     <>
-      <section className="border-b border-line px-4 pb-8 pt-8 md:px-8 md:pt-12">
+      <section data-tour="hero" className="border-b border-line px-4 pb-8 pt-8 md:px-8 md:pt-12">
         <div className="mx-auto max-w-[1440px]">
           <div className="mb-3 flex items-center gap-2 text-[12px] text-muted">
+            <StartDemoButton />
             <span className="chip bg-lemon-soft text-lemon-text">Pilot workspace</span>
             Evaluator: <span className="font-mono">{provider().name === "jev" ? "TypeSafe JEV" : "offline heuristic"}</span>
           </div>
@@ -43,12 +45,14 @@ export default async function Overview() {
         </div>
       </section>
       <Page>
+        <div data-tour="stats">
         <Stagger className="grid grid-cols-2 gap-3 lg:grid-cols-4">
           <StaggerItem><Stat label="Candidates in pool" value={p.total} hint={`${p.imp.files} files imported · ${p.imp.dup} duplicate merged`} /></StaggerItem>
           <StaggerItem><Stat label="Dormant resumes" value={p.dormant} hint={`${Math.round((p.dormant / Math.max(1, p.total)) * 100)}% not updated in 2+ years`} /></StaggerItem>
           <StaggerItem><Stat label="Rediscovered for open roles" value={p.rediscovered} hint={`${p.strongAny} with strong evidence · across ${ran.length} evaluated jobs`} accent /></StaggerItem>
           <StaggerItem><Stat label="Evaluation spend" value={money(p.spend)} hint={`${tokens(p.tokens)} tokens · ${p.runs} runs`} /></StaggerItem>
         </Stagger>
+        </div>
 
         <div className="mt-6 grid gap-6 xl:grid-cols-[1fr_340px]">
           <section className="card overflow-hidden">

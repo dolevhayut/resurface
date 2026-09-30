@@ -6,7 +6,7 @@ import { z } from "zod";
 // LLM step of the pipeline: read the job description and derive N atomic screening
 // questions, each anchored to a verbatim span of the JD. JEV then answers them per resume.
 
-export const QUESTION_COUNT = 6;
+export const QUESTION_COUNT = { min: 6, max: 8 };
 
 export function llmAvailable() {
   return Boolean(process.env.AI_GATEWAY_API_KEY?.trim() || process.env.ANTHROPIC_API_KEY?.trim());
@@ -32,14 +32,15 @@ const schema = z.object({
         min_years: z.number().int().nullable().describe("Only when the requirement is a number of years of experience; otherwise null"),
       }),
     )
-    .length(QUESTION_COUNT),
+    .min(QUESTION_COUNT.min)
+    .max(QUESTION_COUNT.max),
 });
 
 export async function llmQuestions(title: string, description: string) {
   const m = model();
   const { output, usage } = await generateText({
     model: m.model,
-    instructions: `You turn a job description into exactly ${QUESTION_COUNT} screening criteria for evaluating resumes.
+    instructions: `You turn a job description into ${QUESTION_COUNT.min}–${QUESTION_COUNT.max} screening criteria for evaluating resumes.
 Rules:
 - Each question checks ONE thing and is answerable from documented professional experience in a resume.
 - Prefer the job's explicit requirements; mark them "must". Use "nice" for preferred/bonus items.

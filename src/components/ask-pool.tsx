@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import clsx from "clsx";
 import { motion, AnimatePresence } from "motion/react";
@@ -16,8 +16,9 @@ const EXAMPLES = [
   "Candidates with payments or fintech experience",
 ];
 
-export function AskPool({ canQuery, poolSize }: { canQuery: boolean; poolSize: number }) {
-  const [q, setQ] = useState("");
+export function AskPool({ canQuery, poolSize, initialQuery }: { canQuery: boolean; poolSize: number; initialQuery?: string }) {
+  const [q, setQ] = useState(initialQuery ?? "");
+  const auto = useRef(false);
   const [busy, setBusy] = useState(false);
   const [res, setRes] = useState<{ query: string; rows: Row[]; usd: number; provider: string } | null>(null);
   const [err, setErr] = useState("");
@@ -37,6 +38,14 @@ export function AskPool({ canQuery, poolSize }: { canQuery: boolean; poolSize: n
     setRes(j);
   }
 
+  useEffect(() => {
+    if (!initialQuery || !canQuery || auto.current) return;
+    auto.current = true;
+     
+    void ask(initialQuery);
+     
+  }, [initialQuery, canQuery]);
+
   const fits = res?.rows.filter((r) => r.probability >= 0.5) ?? [];
   const maybe = res?.rows.filter((r) => r.probability >= 0.25 && r.probability < 0.5) ?? [];
 
@@ -47,6 +56,7 @@ export function AskPool({ canQuery, poolSize }: { canQuery: boolean; poolSize: n
           e.preventDefault();
           ask(q);
         }}
+        data-tour="ask"
         className={clsx("card relative overflow-hidden p-2 transition-shadow focus-within:shadow-[var(--shadow)]", busy && "border-pine")}
       >
         {busy && <div className="shimmer absolute inset-x-0 top-0 h-0.5" />}

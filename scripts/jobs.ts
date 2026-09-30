@@ -270,12 +270,19 @@ Nice to have:
     title: "Solutions Engineer",
     team: "Sales Engineering",
     location: "Tel Aviv · Hybrid",
-    description: `Requirements:
+    description: `About the role:
+You are the technical voice of our sales team, taking prospects from first demo to a working proof-of-concept.
+Requirements:
+- 3+ years in a customer-facing technical role
 - Running technical product demos for prospects
 - Scripting or coding ability (Python, JavaScript)
 - Integrating APIs for customer proof-of-concepts
+- Explaining technical concepts to non-technical buyers
 Nice to have:
 - Pre-sales in B2B SaaS
-- Customer-facing troubleshooting experience`,
+- Customer-facing troubleshooting experience
+- SQL or data querying
+Benefits:
+- Hybrid work, commission plan, learning budget`,
   },
 ];

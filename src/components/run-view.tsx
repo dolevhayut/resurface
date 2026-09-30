@@ -32,13 +32,14 @@ export function RunView(props: {
   job: { id: string; title: string; team: string; location: string };
   rubric: { version: number; criteria: Criterion[] };
   initialShortlist: string[];
+  initialOpen?: string;
   can: { run: boolean; export: boolean; shortlist: boolean };
 }) {
   const { criteria } = props.rubric;
   const [data, setData] = useState<{ run: Run; progress: Progress; rows: Row[] } | null>(null);
   const [weights, setWeights] = useState<Record<string, number>>(() => Object.fromEntries(criteria.map((c) => [c.id, c.weight])));
   const [showWeights, setShowWeights] = useState(false);
-  const [open, setOpen] = useState<string | null>(null);
+  const [open, setOpen] = useState<string | null>(props.initialOpen ?? null);
   const [shortlist, setShortlist] = useState<Set<string>>(new Set(props.initialShortlist));
   const [compare, setCompare] = useState<string[]>([]);
   const [showCompare, setShowCompare] = useState(false);
@@ -93,7 +94,9 @@ export function RunView(props: {
   const live = run?.status === "running" || run?.status === "paused";
   const processed = p ? p.stage1.completed : 0;
   const evalTotal = p ? p.stage1.total : 0;
-  const counts = Object.fromEntries(GROUPS.map((g) => [g, (data?.rows ?? []).filter((r) => r.match.group === g).length])) as Record<Group, number>;
+  const inGroup = (r: Row, g: Group | "queued") => (r.status === "pending" ? g === "queued" : r.match.group === g);
+  const counts = Object.fromEntries(GROUPS.map((g) => [g, (data?.rows ?? []).filter((r) => inGroup(r, g)).length])) as Record<Group, number>;
+  const queued = (data?.rows ?? []).filter((r) => r.status === "pending").length;
   const openRow = data?.rows.find((r) => r.candidate.id === open);
 
   return (
@@ -156,7 +159,7 @@ export function RunView(props: {
         </div>
       </header>
 
-      <div className="mx-auto max-w-[1440px] px-4 py-6 pb-24 md:px-8 md:pb-10">
+      <div data-tour="results" className="mx-auto max-w-[1440px] px-4 py-6 pb-24 md:px-8 md:pb-10">
         {run && p && <ProgressPanel run={run} p={p} rubricVersion={props.rubric.version} />}
         {err && <p className="mt-3 text-[12.5px] text-bad">{err}</p>}
 
@@ -209,16 +212,17 @@ export function RunView(props: {
           </div>
         </div>
 
-        {GROUPS.map((g) => {
-          const full = rows.filter((r) => r.match.group === g);
+        {[...GROUPS, "queued" as const].map((g) => {
+          const full = rows.filter((r) => inGroup(r, g));
           if (!full.length) return null;
           const limit = g === "lower" && !expanded[g] && !q ? 8 : Infinity;
+          void queued;
           const list = full.slice(0, limit);
           return (
-            <section key={g} id={`g-${g}`} className="card mt-4 overflow-hidden">
+            <section key={g} id={`g-${g}`} data-tour={g === rows.find((r) => r.match.group !== "not_evaluated")?.match.group ? "groups" : undefined} className="card mt-4 overflow-hidden">
               <div className="flex items-center justify-between border-b border-line px-4 py-2.5">
                 <div className="flex items-center gap-2">
-                  <GroupBadge group={g} />
+                  {g === "queued" ? <span className="chip bg-subtle text-muted">Queued</span> : <GroupBadge group={g} />}
                   <span className="tnum text-[12px] text-muted">{full.length}</span>
                 </div>
                 <span className="hidden text-[11.5px] text-faint sm:block">
@@ -226,6 +230,7 @@ export function RunView(props: {
                   {g === "verify" && "Promising, but key criteria are not established in the resume"}
                   {g === "lower" && "Evidence contradicts a must-have or most criteria are unsupported"}
                   {g === "not_evaluated" && "Unreadable file or failed task — not the same as a poor match"}
+                  {g === "queued" && "Waiting for the evaluator"}
                 </span>
               </div>
               <div className="overflow-x-auto">
@@ -250,7 +255,7 @@ export function RunView(props: {
                     {list.map((r) => {
                       const byId = new Map(r.results.map((x) => [x.criterionId, x]));
                       return (
-                        <motion.tr layout="position" transition={{ type: "spring", stiffness: 400, damping: 40 }} key={r.candidate.id} className={clsx("cursor-pointer border-b border-line last:border-0 hover:bg-hover/50", open === r.candidate.id && "bg-pine-soft/60")} onClick={() => setOpen(r.candidate.id)}>
+                        <motion.tr layout="position" initial={{ opacity: 0, backgroundColor: "color-mix(in oklab, var(--lemon) 35%, transparent)" }} animate={{ opacity: 1, backgroundColor: "rgba(0,0,0,0)" }} transition={{ type: "spring", stiffness: 400, damping: 40, backgroundColor: { duration: 1.2 } }} key={r.candidate.id} className={clsx("cursor-pointer border-b border-line last:border-0 hover:bg-hover/50", open === r.candidate.id && "bg-pine-soft/60")} onClick={() => setOpen(r.candidate.id)}>
                           <td className="td pr-0" onClick={(e) => e.stopPropagation()}>
                             <input
                               type="checkbox"
@@ -350,7 +355,7 @@ function ProgressPanel({ run, p, rubricVersion }: { run: Run; p: Progress; rubri
   const done1 = s1.completed / Math.max(1, s1.total);
   const statusTone = run.status === "completed" ? "text-ok" : run.status === "running" ? "text-pine" : run.status === "budget_stopped" || run.status === "cancelled" ? "text-bad" : "text-warn";
   return (
-    <section className="card grid gap-4 p-4 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
+    <section data-tour="progress" className="card grid gap-4 p-4 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
       <div>
         <div className="flex items-center gap-2 text-[12px]">
           <span className={clsx("flex items-center gap-1.5 font-medium capitalize", statusTone)}>

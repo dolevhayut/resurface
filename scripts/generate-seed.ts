@@ -224,7 +224,9 @@ const jobs = JOBS.map((j, i) => ({
 }));
 
 const slug = (x: string) => x.toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_|_$/g, "").slice(0, 40);
-const rubrics = jobs.map((j) => {
+// The last job ("Solutions Engineer") is left without questions: the guided demo drafts them live.
+const LIVE_JOB = "Solutions Engineer";
+const rubrics = jobs.filter((j) => j.title !== LIVE_JOB).map((j) => {
   const qs = RUBRICS[j.title];
   if (!qs || qs.length !== 6) throw new Error(`missing rubric for ${j.title}`);
   const jd = j.description;

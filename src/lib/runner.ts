@@ -15,9 +15,10 @@ const LEASE_MS = 60_000;
 const MAX_ATTEMPTS = 3;
 const TICK_MS = 200;
 
-type G = typeof globalThis & { __cvleapWorker?: NodeJS.Timeout; __cvleapInflight?: Map<string, number> };
+type G = typeof globalThis & { __cvleapWorker?: NodeJS.Timeout; __cvleapInflight?: Map<string, number>; __cvleapTick?: () => void };
 const g = globalThis as G;
 const inflight = () => (g.__cvleapInflight ??= new Map<string, number>()); // taskId → estimated usd
+const lastDispatch = new Map<string, number>(); // runId → ms, for paced demo runs
 
 // ---------- helpers ----------
 
@@ -73,6 +74,7 @@ export function createRun(opts: {
   pruneContradicted: boolean;
   actor: string;
   candidateIds?: string[];
+  paceMs?: number;
 }): Run {
   const d = db();
   const rubric = d.rubrics.find((r) => r.id === opts.rubricId && r.tenantId === TENANT);
@@ -99,6 +101,7 @@ export function createRun(opts: {
     calls: 0,
     pruneContradicted: opts.pruneContradicted,
     auditSampleRate: 0.1,
+    paceMs: opts.paceMs,
     createdAt: now(),
     createdBy: opts.actor,
   };
@@ -163,7 +166,8 @@ export function ensureWorker() {
   for (const task of db().tasks)
     if ((task.state === "leased" || task.state === "running") && !inflight().has(task.id) && (task.leaseUntil ?? 0) < t + LEASE_MS)
       task.state = "queued";
-  g.__cvleapWorker = setInterval(tick, TICK_MS);
+  // Indirect call so a hot-reloaded module swaps in its new tick without restarting the timer.
+  g.__cvleapWorker = setInterval(() => g.__cvleapTick?.(), TICK_MS);
 }
 
 function tick() {
@@ -190,6 +194,14 @@ function tick() {
   while (slots > 0 && active.some((a) => a.ready.length)) {
     for (const a of active) {
       if (slots <= 0) break;
+      if (a.run.paceMs) {
+        const busy = [...inflight().keys()].some((id) => d.tasks.find((x) => x.id === id)?.runId === a.run.id);
+        if (busy || t - (lastDispatch.get(a.run.id) ?? 0) < a.run.paceMs) {
+          a.ready = [];
+          continue;
+        }
+        lastDispatch.set(a.run.id, t);
+      }
       const task = a.ready.shift();
       if (!task || a.run.status !== "running") continue;
       const cand = d.candidates.find((c) => c.id === task.candidateId);
@@ -383,3 +395,5 @@ export function runResults(run: Run, weights?: Record<string, number>): ResultRo
   }
   return sortMatches(rows);
 }
+
+g.__cvleapTick = tick;

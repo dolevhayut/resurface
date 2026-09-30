@@ -5,8 +5,9 @@ import { RunView } from "@/components/run-view";
 
 export const dynamic = "force-dynamic";
 
-export default async function RunPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function RunPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ open?: string }> }) {
   const { id } = await params;
+  const { open } = await searchParams;
   const d = db();
   const run = d.runs.find((r) => r.id === id && r.tenantId === TENANT);
   if (!run) notFound();
@@ -20,6 +21,7 @@ export default async function RunPage({ params }: { params: Promise<{ id: string
       job={{ id: job.id, title: job.title, team: job.team, location: job.location }}
       rubric={{ version: rubric.version, criteria: rubric.criteria }}
       initialShortlist={shortlist}
+      initialOpen={open}
       can={{ run: s.can("run"), export: s.can("export"), shortlist: s.can("shortlist") }}
     />
   );

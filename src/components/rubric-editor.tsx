@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import clsx from "clsx";
 import type { Criterion, RubricVersion, ResumeLine } from "@/lib/types";
 import { money } from "./ui";
+import { motion } from "motion/react";
 import { Icon } from "./icons";
 
 async function api(url: string, method: string, body?: unknown) {
@@ -69,7 +70,7 @@ export function RubricEditor(props: {
   if (!rubric)
     return (
       <div className="grid gap-6 lg:grid-cols-[1fr_380px]">
-        <div className="card grid place-items-center px-6 py-16 text-center">
+        <div data-tour="draft" className="card grid place-items-center px-6 py-16 text-center">
           <Icon name="sparkle" className="size-5 text-pine" />
           <h2 className="mt-3 text-[15px] font-semibold">Draft criteria from this job description</h2>
           <p className="mt-1 max-w-md text-muted">
@@ -97,7 +98,7 @@ export function RubricEditor(props: {
   return (
     <div className="grid gap-6 lg:grid-cols-[1fr_380px]">
       <div className="min-w-0 space-y-4">
-        <section className="card overflow-hidden">
+        <section data-tour="criteria" className="card overflow-hidden">
           <div className="flex flex-wrap items-center justify-between gap-2 border-b border-line px-4 py-3">
             <div className="flex items-center gap-2">
               <h2 className="text-[14px] font-semibold">Criteria</h2>
@@ -154,8 +155,11 @@ export function RubricEditor(props: {
             </div>
           </div>
           <ul>
-            {criteria.map((c) => (
-              <li
+            {criteria.map((c, i) => (
+              <motion.li
+                initial={{ opacity: 0, y: 10, filter: "blur(4px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                transition={{ delay: i * 0.12, type: "spring", stiffness: 260, damping: 28 }}
                 key={c.id}
                 className="grid gap-3 border-b border-line px-4 py-3 last:border-0 sm:grid-cols-[1fr_auto]"
                 onMouseEnter={() => setHover(c.sourceJobSpan)}
@@ -237,7 +241,7 @@ export function RubricEditor(props: {
                     </button>
                   )}
                 </div>
-              </li>
+              </motion.li>
             ))}
           </ul>
           {editable && (
@@ -298,7 +302,7 @@ export function RubricEditor(props: {
 
       <div className="space-y-4">
         {locked && (
-          <section className="card p-4">
+          <section data-tour="preview" className="card p-4">
             <h2 className="text-[14px] font-semibold">Run preview</h2>
             <dl className="mt-3 space-y-2 text-[13px]">
               {[
@@ -352,7 +356,7 @@ export function RubricEditor(props: {
 
 function JobDescription({ lines, sources, hover }: { lines: ResumeLine[]; sources: Set<string | null>; hover: string | null }) {
   return (
-    <section className="card p-4">
+    <section data-tour="jd" className="card p-4">
       <h2 className="text-[14px] font-semibold">Job description</h2>
       <p className="mt-0.5 text-[12px] text-faint">Highlighted lines became criteria.</p>
       <ol className="mt-3 space-y-1 text-[12.5px] leading-5">

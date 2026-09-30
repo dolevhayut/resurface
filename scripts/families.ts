@@ -16,7 +16,7 @@ export interface Family {
 export const FAMILIES: Family[] = [
   {
     key: "fullstack",
-    count: 10,
+    count: 9,
     titles: ["Software Engineer", "Full Stack Developer", "Senior Full Stack Engineer"],
     core: [
       "Built customer-facing dashboards in React and TypeScript used by 40k monthly users",
@@ -400,7 +400,7 @@ export const FAMILIES: Family[] = [
   },
   {
     key: "se",
-    count: 3,
+    count: 4,
     titles: ["Support Engineer", "Solutions Engineer", "Senior Solutions Engineer"],
     core: [
       "Ran technical product demos for 150+ prospects per year",
@@ -408,8 +408,14 @@ export const FAMILIES: Family[] = [
       "Integrated customer systems with our REST APIs and webhooks",
       "Pre-sales engineer for a B2B SaaS security platform",
       "Troubleshot customer issues in production with logs and API traces",
+      "Explained technical architecture and integration trade-offs to non-technical buyers and executives",
+      "Wrote SQL queries to validate customer data during pilots",
     ],
-    adjacent: ["Supported account executives in technical evaluations", "Built sample integrations for customer pilots"],
+    adjacent: [
+      "Supported account executives in technical evaluations",
+      "Built sample integrations for customer pilots",
+      "Translated complex API concepts into business value for procurement and finance stakeholders",
+    ],
     generic: ["Answered support tickets", "Trained customers on the product", "Wrote knowledge base articles"],
     skills: ["Python", "JavaScript", "REST APIs", "Postman", "SQL"],
     degrees: ["B.Sc. Information Systems, Technion", "B.Sc. Computer Science, Tel Aviv-Yaffo College"],

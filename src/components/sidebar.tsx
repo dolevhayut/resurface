@@ -5,6 +5,7 @@ import clsx from "clsx";
 import { motion } from "motion/react";
 import { Icon, type IconName } from "./icons";
 import { AnimatedBackground, spring } from "./motion";
+import { startDemo } from "./demo-guide";
 
 const NAV: { href: string; label: string; icon: IconName }[] = [
   { href: "/", label: "Overview", icon: "overview" },
@@ -68,6 +69,16 @@ export function Sidebar({ role, name, provider }: { role: string; name: string; 
           </AnimatedBackground>
         </nav>
         <div className="mt-auto space-y-2.5">
+          <motion.button
+            whileHover={{ y: -1 }}
+            whileTap={{ scale: 0.97 }}
+            onClick={startDemo}
+            className="group relative flex h-10 w-full items-center gap-2 overflow-hidden rounded-xl bg-pine px-3 text-[12.5px] font-medium text-on-pine"
+          >
+            <span className="absolute inset-0 translate-x-[-100%] bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-[100%]" />
+            <Icon name="play" weight="fill" className="size-3.5 text-lemon" /> Guided demo
+            <span className="ml-auto rounded-md bg-white/15 px-1.5 text-[10.5px]">~3 min</span>
+          </motion.button>
           <div className="grain rounded-2xl border border-line bg-subtle/60 p-3">
             <div className="flex items-center gap-1.5 text-[11.5px] text-muted">
               <span className="relative flex size-2">

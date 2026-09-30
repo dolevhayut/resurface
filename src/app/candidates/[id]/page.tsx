@@ -9,8 +9,9 @@ import { session } from "@/lib/session";
 
 export const dynamic = "force-dynamic";
 
-export default async function CandidatePage({ params }: { params: Promise<{ id: string }> }) {
+export default async function CandidatePage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ reverse?: string }> }) {
   const { id } = await params;
+  const { reverse } = await searchParams;
   const d = db();
   const c = d.candidates.find((x) => x.id === id && x.tenantId === TENANT && !x.deletedAt);
   if (!c) notFound();
@@ -44,7 +45,7 @@ export default async function CandidatePage({ params }: { params: Promise<{ id: 
       <Page>
         <div className="grid gap-6 lg:grid-cols-[1fr_420px]">
           <div className="space-y-6">
-            <ReverseMatch candidateId={c.id} canQuery={s.can("query")} />
+            <ReverseMatch candidateId={c.id} canQuery={s.can("query")} autoRun={reverse === "1"} />
             <section className="card overflow-hidden">
               <h2 className="border-b border-line px-4 py-3 text-[14px] font-semibold">Evaluated in runs</h2>
               {matches.length === 0 && <p className="px-4 py-6 text-muted">Not evaluated yet. Run a job or use “Match to open jobs”.</p>}

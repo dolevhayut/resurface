@@ -10,7 +10,7 @@ export function RunAllButton({ jobs, disabled, className }: { jobs: number; disa
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState("");
   return (
-    <span className="inline-flex flex-col">
+    <span data-tour="run-all" className="inline-flex flex-col">
       <motion.button
         whileTap={{ scale: 0.96 }}
         whileHover={{ y: -1 }}

@@ -133,7 +133,7 @@ export async function draftRubric(jobId: string, actor: string): Promise<RubricV
       if (lab === "MUST") musts.push(uniq(criterionFromLine(l.text, "must", l.text)));
       if (lab === "NICE") nices.push(uniq(criterionFromLine(l.text, "nice", l.text)));
     }
-    criteria = [...musts, ...nices].slice(0, QUESTION_COUNT);
+    criteria = [...musts, ...nices].slice(0, QUESTION_COUNT.max);
     draftedBy = `${p.name}:${model}`;
   }
   criteria = assignStages(criteria);

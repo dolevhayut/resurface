@@ -134,6 +134,7 @@ export interface Run {
   calls: number;
   pruneContradicted: boolean;
   auditSampleRate: number;
+  paceMs?: number; // demo pacing: dispatch one resume at a time so results visibly stream in
   createdAt: string;
   createdBy: string;
   finishedAt?: string;

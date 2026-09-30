@@ -44,6 +44,7 @@ export default async function JobPage({ params }: { params: Promise<{ id: string
       />
       <Page>
         <RubricEditor
+          key={rubric ? `${rubric.id}:${rubric.status}` : "none"}
           job={{ id: job.id, title: job.title }}
           jdLines={jobLines(job)}
           rubric={rubric ?? null}
