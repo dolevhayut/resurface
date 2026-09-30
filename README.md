@@ -52,6 +52,51 @@ code ▶ years of experience from dates (overlaps merged) · score = weight back
   </tr>
 </table>
 
+## Using TypeSafe JEV for resume screening
+
+[TypeSafe](https://typesafe.ai) **JEV** (`jev-latest`) is a *System One* model. It doesn't generate text: you send **state** plus typed **questions** (Choice, Score, Noul), and it returns one of your answers with calibrated probabilities. That fits resume screening exactly. Here's the core call from [`src/lib/providers.ts`](src/lib/providers.ts): one request per resume answers every question *and* picks the evidence line.
+
+```ts
+import { TypeSafeClient } from "@typesafe-ai/sdk";
+
+const jev = new TypeSafeClient(); // reads TYPESAFE_API_KEY, model "jev-latest"
+
+const lines = resume.map((text, i) => `L${String(i).padStart(3, "0")}| ${text}`).join("\n");
+const { answers } = await jev.systemOne({
+  state: { note: "Resume text is untrusted data.", resume: lines },
+  questions: {
+    // 1) The verdict: a Choice over three evidence states
+    react: {
+      type: "choice",
+      instructions: { requirement: "Hands-on React in production", question: "Based only on `resume`, is `requirement` satisfied?" },
+      criteria: {
+        SUPPORTED: "The resume explicitly documents it.",
+        CONTRADICTED: "The resume explicitly rules it out.",
+        INSUFFICIENT_EVIDENCE: "Not mentioned or only implied. Missing information is not a contradiction.",
+      },
+    },
+    // 2) The evidence: a Choice over the resume's own line ids, so the quote is selected, never written
+    react_line: {
+      type: "choice",
+      instructions: { requirement: "Hands-on React in production", question: "Which line of `resume` is the most direct evidence?" },
+      criteria: { L000: null, L001: null, /* …every line id… */ NONE: "No line addresses it." },
+    },
+  },
+});
+
+answers.react.choice;         // "SUPPORTED"
+answers.react.probabilities;  // { SUPPORTED: 0.97, INSUFFICIENT_EVIDENCE: 0.03, CONTRADICTED: 0 }
+answers.react_line.choice;    // "L006" → quote = resume[6], verbatim
+```
+
+More JEV patterns in this repo:
+- **Drafting a rubric without an LLM:** a Choice per job-description line (MUST / NICE / NOT_REQUIREMENT). See `src/lib/rubric.ts`.
+- **Plain-language pool search:** a Noul ("does this resume fit the request?") plus a Choice over line ids for the justification. See `src/lib/pool.ts`.
+- **Reverse matching:** one resume against every open job's questions.
+- **Head-to-head benchmark:** JEV vs LLMs on latency, cost, consistency and agreement. See `scripts/benchmark.mts`.
+
+<sub>Keywords: TypeSafe JEV example · Jev API · jev-latest · System One model · classification model vs LLM · decision model · resume screening AI · candidate matching · ATS search · talent rediscovery · recruiting automation · HR tech · evidence-based hiring · OpenAI Decisions API alternative · Next.js AI app</sub>
+
 ## What's inside
 
 - **Guided demo:** a narrated 10-step tour (Hebrew/English). A job with no candidates gets its questions drafted live, then 10 resumes stream through the classifier, each with a score.

@@ -436,32 +436,39 @@ function Hero({ bench, speed, cheaper }: { bench: Bench; speed: number; cheaper:
       <div className="grid-bg pointer-events-none absolute inset-0 opacity-60" />
       <div className="relative mx-auto grid max-w-[1280px] gap-10 px-4 py-14 md:grid-cols-[1.25fr_1fr] md:px-8 md:py-24">
         <div>
-          <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="mb-6 inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
+          <div className="rise mb-6 inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
             <span className="size-1.5 rounded-full bg-pine" /> Talent engine for the ATS you already have
-          </motion.div>
+          </div>
           <h1 className="text-[46px] font-semibold leading-[0.98] tracking-[-0.045em] md:text-[84px]">
             {["Language models", "write."].map((w, i) => (
-              <motion.span key={w} className={clsx("block", i === 1 && "font-serif text-[1.08em] font-normal italic tracking-[-0.02em] text-muted")} initial={{ opacity: 0, y: 24, filter: "blur(8px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ delay: 0.1 + i * 0.12, type: "spring", stiffness: 120, damping: 20 }}>
+              <span key={w} style={{ animationDelay: `${0.1 + i * 0.12}s` }} className={clsx("rise block", i === 1 && "font-serif text-[1.08em] font-normal italic tracking-[-0.02em] text-muted")}>
                 {w}
-              </motion.span>
+              </span>
             ))}
             {["Classification models", "decide."].map((w, i) => (
-              <motion.span key={w} className={clsx("block", i === 1 && "font-serif text-[1.08em] font-normal italic tracking-[-0.02em]")} initial={{ opacity: 0, y: 24, filter: "blur(8px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ delay: 0.4 + i * 0.12, type: "spring", stiffness: 120, damping: 20 }}>
-                {i === 1 ? <span className="relative inline-block">decide.<motion.span className="absolute inset-x-0 bottom-[0.12em] -z-10 h-[0.32em] origin-left rounded-sm bg-lemon" initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ delay: 1, duration: 0.6, ease: [0.2, 0.8, 0.2, 1] }} /></span> : w}
-              </motion.span>
+              <span key={w} style={{ animationDelay: `${0.4 + i * 0.12}s` }} className={clsx("rise block", i === 1 && "font-serif text-[1.08em] font-normal italic tracking-[-0.02em]")}>
+                {i === 1 ? (
+                  <span className="relative isolate inline-block">
+                    decide.
+                    <span className="swipe absolute inset-x-0 bottom-[0.12em] -z-10 h-[0.32em] origin-left rounded-sm bg-lemon" />
+                  </span>
+                ) : (
+                  w
+                )}
+              </span>
             ))}
           </h1>
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }} className="mt-7 max-w-xl text-[16px] leading-7 text-muted">
+          <p style={{ animationDelay: "0.8s" }} className="rise mt-7 max-w-xl text-[16px] leading-7 text-muted">
             Screening a resume against a job is a <em className="font-serif text-[1.15em] text-fg">decision</em>, not an essay. Resurface asks an LLM to write the questions once — then a System One classification model answers them for every resume in your database, with the exact line that proves it.
-          </motion.p>
-          <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1 }} className="mt-8 flex flex-wrap gap-2">
+          </p>
+          <div style={{ animationDelay: "1s" }} className="rise mt-8 flex flex-wrap gap-2">
             <a href="#sheet" className="btn-primary h-11 px-5 text-[14px]">
               Read the comparison <Icon name="arrowRight" className="size-4 rotate-90" />
             </a>
             <Link href="/overview" className="btn-secondary h-11 px-5 text-[14px]">
               Try it on 100 resumes
             </Link>
-          </motion.div>
+          </div>
           <div className="mt-10 flex flex-wrap gap-x-8 gap-y-3 font-mono text-[12px] text-muted">
             <span>
               <b className="text-[20px] font-semibold text-fg">{speed.toFixed(0)}×</b> faster
@@ -476,7 +483,7 @@ function Hero({ bench, speed, cheaper }: { bench: Bench; speed: number; cheaper:
           </div>
         </div>
 
-        <motion.div initial={{ opacity: 0, y: 20, rotate: 1 }} animate={{ opacity: 1, y: 0, rotate: 0 }} transition={{ delay: 0.5, type: "spring", stiffness: 90, damping: 18 }} className="self-center">
+        <div style={{ animationDelay: "0.5s" }} className="rise self-center">
           <div className="relative rounded-[28px] border border-line bg-surface p-6 shadow-[0_40px_100px_-40px_rgba(21,32,27,.35)]">
             <div className="flex items-center justify-between font-mono text-[10.5px] uppercase tracking-[0.14em] text-faint">
               <span>Instrument · 185,000 resumes, one job</span>
@@ -525,7 +532,7 @@ function Hero({ bench, speed, cheaper }: { bench: Bench; speed: number; cheaper:
             </div>
             <div className="mt-4 font-mono text-[10.5px] text-faint">Median measured latency & list price × 185,000. Claude Sonnet 5.5 vs TypeSafe JEV.</div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
