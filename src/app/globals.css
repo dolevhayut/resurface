@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+/* Pine / Lemon — quiet paper neutrals, pine for action, lemon for highlights. */
+:root {
+  color-scheme: light;
+  --frame: #e9e9e0;
+  --bg: #f8f8f3;
+  --surface: #ffffff;
+  --subtle: #f0f0e8;
+  --hover: #ebebe2;
+  --text: #15201b;
+  --muted: #5d6862;
+  --faint: #8a938d;
+  --border: #e4e4da;
+  --control: #c9cbbf;
+  --pine: #1d5b44;
+  --pine-hover: #164835;
+  --pine-soft: #e3efe8;
+  --on-pine: #ffffff;
+  --lemon: #e8d640;
+  --lemon-soft: #fbf6d3;
+  --lemon-text: #6a5a00;
+  --ok: #1b6b43;
+  --ok-bg: #e6f3eb;
+  --warn: #7a5600;
+  --warn-bg: #fbf1d0;
+  --bad: #a1302b;
+  --bad-bg: #fbeae8;
+  --shadow: 0 8px 28px rgba(21, 32, 27, 0.1);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --frame: #070a09;
+    --bg: #0d1311;
+    --surface: #121916;
+    --subtle: #18211d;
+    --hover: #1d2823;
+    --text: #ecefe9;
+    --muted: #9ba69f;
+    --faint: #6d7872;
+    --border: #232e29;
+    --control: #3a4741;
+    --pine: #8fd3b0;
+    --pine-hover: #aee2c6;
+    --pine-soft: #17302a;
+    --on-pine: #0c110f;
+    --lemon: #eadf72;
+    --lemon-soft: #2c2a14;
+    --lemon-text: #eadf72;
+    --ok: #86dca9;
+    --ok-bg: #15301f;
+    --warn: #efd27a;
+    --warn-bg: #33290f;
+    --bad: #f3a19b;
+    --bad-bg: #3a1a18;
+    --shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+  }
+}
+
+@theme inline {
+  --color-frame: var(--frame);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-subtle: var(--subtle);
+  --color-hover: var(--hover);
+  --color-fg: var(--text);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-line: var(--border);
+  --color-control: var(--control);
+  --color-pine: var(--pine);
+  --color-pine-hover: var(--pine-hover);
+  --color-pine-soft: var(--pine-soft);
+  --color-on-pine: var(--on-pine);
+  --color-lemon: var(--lemon);
+  --color-lemon-soft: var(--lemon-soft);
+  --color-lemon-text: var(--lemon-text);
+  --color-ok: var(--ok);
+  --color-ok-bg: var(--ok-bg);
+  --color-warn: var(--warn);
+  --color-warn-bg: var(--warn-bg);
+  --color-bad: var(--bad);
+  --color-bad-bg: var(--bad-bg);
+  --font-sans: var(--font-geist-sans), var(--font-hebrew), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+html, body { background: var(--frame); color: var(--text); }
+body { font-size: 13px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+:lang(he), [dir="rtl"] { font-family: var(--font-hebrew), var(--font-geist-sans), sans-serif; }
+:focus-visible { outline: 2px solid var(--pine); outline-offset: 2px; border-radius: 6px; }
+.tnum { font-variant-numeric: tabular-nums; }
+::selection { background: var(--lemon); color: #15201b; }
+
+@utility btn { @apply inline-flex h-8 items-center gap-1.5 rounded-lg px-3 text-[13px] font-medium whitespace-nowrap transition-colors duration-150 disabled:cursor-not-allowed disabled:opacity-50; }
+@utility btn-primary { @apply btn bg-pine text-on-pine hover:bg-pine-hover; }
+@utility btn-secondary { @apply btn border border-line bg-surface text-fg hover:bg-hover; }
+@utility btn-ghost { @apply btn text-muted hover:bg-hover hover:text-fg; }
+@utility btn-danger { @apply btn border border-line bg-surface text-bad hover:bg-bad-bg; }
+@utility card { @apply rounded-xl border border-line bg-surface; }
+@utility input { @apply h-9 w-full rounded-lg border border-control bg-surface px-3 text-[13px] text-fg placeholder:text-faint outline-none focus:border-pine; }
+@utility label { @apply text-[12px] font-medium text-muted; }
+@utility kbd { @apply rounded border border-line bg-subtle px-1.5 py-px font-mono text-[11px] text-muted; }
+@utility chip { @apply inline-flex h-[22px] items-center gap-1 rounded-full px-2 text-[11.5px] font-medium whitespace-nowrap; }
+@utility th { @apply h-9 px-3 text-left text-[12px] font-medium text-muted; }
+@utility td { @apply px-3 py-2.5 align-middle; }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+@keyframes fade { from { opacity: 0 } to { opacity: 1 } }
+@keyframes drawer { from { transform: translateX(24px); opacity: 0 } to { transform: none; opacity: 1 } }
+@keyframes pop { from { transform: translateY(8px) scale(.98); opacity: 0 } to { transform: none; opacity: 1 } }
+@keyframes shimmer { from { background-position: -200% 0 } to { background-position: 200% 0 } }
+.shimmer { background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--lemon) 35%, transparent), transparent); background-size: 200% 100%; animation: shimmer 1.6s linear infinite; }
+.grain { background-image: radial-gradient(color-mix(in oklab, var(--text) 7%, transparent) 1px, transparent 1px); background-size: 14px 14px; }
