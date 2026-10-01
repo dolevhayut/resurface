@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Resurface · Product Hunt gallery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=block" rel="stylesheet" />
+<style>
+  :root { --pine: #1d5b44; --pine-deep: #123d2e; --lemon: #e8d640; --cream: #f5f2ea; --ink: #14211b; --muted: #5f6b64; --line: #e1ddd0; }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: #ddd; font-family: Geist, system-ui, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+  .slide { width: 1270px; height: 760px; position: relative; overflow: hidden; background: var(--cream); margin: 0 0 24px; }
+  .grid::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 48px 48px; opacity: .45; mask-image: radial-gradient(ellipse at 50% 45%, #000 30%, transparent 78%); }
+  .brand { position: absolute; left: 64px; top: 52px; display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 22px; letter-spacing: -.02em; z-index: 2; }
+  .brand svg { width: 34px; height: 34px; }
+  .url { position: absolute; left: 64px; bottom: 50px; font: 500 17px "Geist Mono", monospace; color: var(--muted); z-index: 2; }
+  h1 { font-weight: 700; letter-spacing: -.045em; line-height: .98; }
+  em { font-family: "Instrument Serif", serif; font-weight: 400; font-style: italic; letter-spacing: -.02em; }
+  .mark { background: linear-gradient(transparent 58%, var(--lemon) 58%, var(--lemon) 92%, transparent 92%); padding: 0 .06em; }
+  .sub { font-size: 25px; line-height: 1.4; color: var(--muted); letter-spacing: -.01em; }
+  .center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; z-index: 1; }
+  .pill { display: inline-flex; align-items: center; gap: 14px; background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 18px 30px; font-size: 27px; font-weight: 500; letter-spacing: -.02em; box-shadow: 0 10px 30px -18px rgba(20,33,27,.35); }
+  .dot { width: 14px; height: 14px; border-radius: 50%; background: var(--pine); flex: none; }
+  .card { background: #fff; border: 1px solid var(--line); border-radius: 26px; box-shadow: 0 30px 70px -40px rgba(20,33,27,.45); }
+  .badge { display: inline-flex; align-items: center; gap: 10px; background: #e3efe8; color: var(--pine); border-radius: 999px; padding: 10px 20px; font-weight: 600; font-size: 22px; }
+  .num { font-weight: 700; font-size: 132px; letter-spacing: -.06em; line-height: 1; color: var(--pine); }
+  .lab { font-size: 26px; color: var(--ink); margin-top: 14px; letter-spacing: -.02em; font-weight: 500; }
+  .foot { font: 400 16px "Geist Mono", monospace; color: var(--muted); }
+  .mono { font-family: "Geist Mono", monospace; }
+  .dark { background: var(--pine-deep); color: var(--cream); }
+  .dark .url, .dark .sub { color: #b9cdc3; }
+</style>
+</head>
+<body>
+<template id="logo"><svg viewBox="185 185 654 654" fill="currentColor" aria-hidden="true"><rect x="256" y="526" width="512" height="128" rx="26"/><rect x="256" y="690" width="512" height="128" rx="26"/><rect x="263.3" y="245.2" width="486.4" height="212" rx="34" transform="rotate(-12.35 506.5 351.2)"/></svg></template>
+
+<!-- 1 · hero -->
+<section class="slide" id="s1">
+  <img src="art/hero-art.png" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position: right center;" />
+  <div class="brand" style="color:var(--pine)"><span data-logo></span><span style="color:var(--ink)">Resurface</span></div>
+  <div style="position:absolute; left:64px; top:168px; width:680px; z-index:1">
+    <h1 style="font-size:66px; white-space:nowrap">Score any resume.<br /><em class="mark">Prove</em> every answer.</h1>
+    <p class="sub" style="margin-top:26px; width:500px; font-size:23px">An API that scores resumes against a job and quotes the line behind every verdict.</p>
+  </div>
+  <div class="url" style="color:#d7e6dd">getresurface.dev</div>
+</section>
+
+<!-- 2 · questions -->
+<section class="slide grid" id="s2">
+  <div class="brand" style="color:var(--pine)"><span data-logo></span><span style="color:var(--ink)">Resurface</span></div>
+  <div class="center" style="gap:56px">
+    <h1 style="font-size:78px">An LLM writes the questions <em>once.</em></h1>
+    <div style="display:flex; flex-direction:column; gap:18px; align-items:center">
+      <span class="pill"><span class="dot"></span>Built React apps in production?</span>
+      <span class="pill"><span class="dot"></span>Ran services on AWS?</span>
+      <span class="pill"><span class="dot"></span>5+ years of engineering?</span>
+    </div>
+    <p class="sub">One job description in, 6–8 atomic screening questions out.</p>
+  </div>
+  <div class="url">getresurface.dev</div>
+</section>
+
+<!-- 3 · evidence -->
+<section class="slide grid" id="s3">
+  <div class="brand" style="color:var(--pine)"><span data-logo></span><span style="color:var(--ink)">Resurface</span></div>
+  <div style="position:absolute; left:64px; top:210px; width:600px; z-index:1">
+    <h1 style="font-size:84px">Every answer quotes <em>its line.</em></h1>
+    <p class="sub" style="margin-top:28px; width:520px">The evidence is selected from the resume, never generated. Nothing to hallucinate.</p>
+  </div>
+  <img src="art/evidence-spot.png" alt="" style="position:absolute; right:40px; top:70px; width:560px; height:560px; object-fit:contain; z-index:0" />
+  <div class="card" style="position:absolute; right:84px; bottom:86px; width:520px; padding:26px 28px; z-index:1">
+    <span class="badge">✓ Supported</span>
+    <p style="margin-top:18px; font-size:25px; line-height:1.35; letter-spacing:-.015em; border-left:4px solid var(--lemon); padding-left:16px">“Built batch pipelines in Spark processing 3TB/day”</p>
+    <p class="mono" style="margin-top:12px; color:var(--muted); font-size:16px">resume line L008</p>
+  </div>
+  <div class="url">getresurface.dev</div>
+</section>
+
+<!-- 4 · numbers -->
+<section class="slide grid" id="s4">
+  <div class="brand" style="color:var(--pine)"><span data-logo></span><span style="color:var(--ink)">Resurface</span></div>
+  <div class="center" style="gap:64px">
+    <h1 style="font-size:64px">A classifier, not a chatbot.</h1>
+    <div style="display:flex; gap:110px; text-align:center">
+      <div><div class="num">8×</div><div class="lab">faster</div></div>
+      <div><div class="num">31×</div><div class="lab">cheaper</div></div>
+      <div><div class="num">99%</div><div class="lab">same verdicts</div></div>
+    </div>
+    <p class="foot">TypeSafe Jev vs Claude Sonnet 5.5 · 20 resumes × 5 questions · list prices</p>
+  </div>
+  <div class="url">getresurface.dev</div>
+</section>
+
+<!-- 5 · api -->
+<section class="slide grid" id="s5">
+  <div class="brand" style="color:var(--pine)"><span data-logo></span><span style="color:var(--ink)">Resurface</span></div>
+  <div class="center" style="gap:40px">
+    <h1 style="font-size:74px">One API call.</h1>
+    <div class="card mono" style="text-align:left; padding:30px 44px; font-size:25px; line-height:1.55">
+      <div>curl getresurface.dev/api/v1/score \</div>
+      <div style="padding-left:28px">-H "Authorization: Bearer $KEY" \</div>
+      <div style="padding-left:28px">-F job_description=@job.txt \</div>
+      <div style="padding-left:28px">-F resume=@<span class="mark">candidate.pdf</span></div>
+    </div>
+    <p class="sub">PDF · DOCX · HTML · TXT. Hebrew and English.</p>
+  </div>
+  <div class="url">getresurface.dev</div>
+</section>
+
+<!-- 6 · pricing -->
+<section class="slide dark" id="s6">
+  <div class="brand" style="color:var(--lemon)"><span data-logo></span><span style="color:var(--cream)">Resurface</span></div>
+  <div class="center" style="gap:34px">
+    <h1 style="font-size:104px; color:var(--cream)">50 scores <em style="color:var(--lemon)">free.</em></h1>
+    <p class="sub" style="font-size:32px">Then $0.10 a resume. Open source demo on GitHub.</p>
+    <span class="pill" style="margin-top:20px; background:var(--lemon); border-color:var(--lemon); color:var(--ink); font-weight:600">getresurface.dev →</span>
+  </div>
+</section>
+
+<!-- thumbnail 240 -->
+<section id="thumb" style="width:240px; height:240px; background:var(--pine); display:grid; place-items:center; border-radius:0">
+  <div style="width:150px; height:150px; color:#fff"><span data-logo></span></div>
+</section>
+
+<script>
+  const svg = document.getElementById("logo").innerHTML;
+  document.querySelectorAll("[data-logo]").forEach((el) => { el.innerHTML = svg; const s = el.querySelector("svg"); s.style.width = el.closest("#thumb") ? "150px" : "34px"; s.style.height = s.style.width; });
+</script>
+</body>
+</html>

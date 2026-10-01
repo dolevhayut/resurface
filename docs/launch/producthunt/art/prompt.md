@@ -1,0 +1,9 @@
+Use the imagegen skill with the built-in image_gen tool (not the CLI fallback). Generate three separate images (one image_gen call each) for a Product Hunt launch of "Resurface", an API that scores resumes against a job and quotes the exact resume line as evidence. Brand: deep pine green #1d5b44, lemon yellow #e8d640 used sparingly, warm cream paper #f5f2ea, near-black ink #14211b. Calm, editorial, minimal, matte, lots of empty space; think Linear or Vercel launch art, not stock 3D. Absolutely no text, letters, numbers, logos or UI in any image.
+
+1) hero-art: landscape 16:9. Calm deep pine-green water fills the lower third. A short, neat stack of white paper sheets (resumes) rises out of the water into soft warm cream light. The top sheet is tilted about 12 degrees and lifted above the stack. Abstract grey bars stand in for text lines on it, and exactly one bar has a single lemon-yellow highlighter stroke. Flat shapes, subtle paper grain, soft realistic shadows. Keep the left 45% of the frame as empty cream space for a headline. Composition sits right of center.
+
+2) evidence-spot: square 1:1 with a transparent background. A single white paper sheet, slightly tilted, seen from the front with a soft shadow. Abstract grey bars stand in for text lines. Exactly one bar is highlighted with a lemon-yellow highlighter stroke, and a small round pine-green badge with a white check mark sits beside that line. Nothing else.
+
+3) square-art: square 1:1. The same motif reduced to bold flat shapes on a deep pine-green background: two stacked white horizontal bars and a tilted white card above them carrying one lemon-yellow highlight stroke. It must read clearly at 240x240 pixels. Center it with generous padding.
+
+After generating, copy the selected outputs from $CODEX_HOME/generated_images into this directory as hero-art.png, evidence-spot.png and square-art.png, then list the three files with their pixel sizes.
