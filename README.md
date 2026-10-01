@@ -33,6 +33,12 @@ curl https://getresurface.dev/api/v1/score \
 
 You get back a 0–100 score, a verdict for every screening question, and the resume line that proves each one. **50 scores free, then $0.10 per resume.** [API docs →](https://getresurface.dev/docs)
 
+**Using a coding agent?** Add the API as a skill to Claude Code, Codex, Cursor and other agents ([source](skills/resurface-api/SKILL.md)):
+
+```bash
+npx skills add dolevhayut/resurface
+```
+
 | | Open-source demo (this repo) | **Resurface API** |
 |---|---|---|
 | Setup | Clone, add TypeSafe + LLM keys, deploy | **Sign up, copy a key** |
