@@ -12,10 +12,38 @@
 </p>
 
 <p align="center">
-  <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fdolevhayut%2Fresurface&project-name=resurface&repository-name=resurface"><img src="https://vercel.com/button" alt="Deploy with Vercel"></a>
+  <a href="https://getresurface.dev/?ref=github"><img src="https://img.shields.io/badge/Hosted%20API-50%20free%20scores%20%E2%86%92-1d5b44?style=for-the-badge" alt="Use the hosted Resurface API: 50 free scores"></a>
+  &nbsp;
+  <a href="#run-it-yourself"><img src="https://img.shields.io/badge/Self--host-the%20demo-f5f2ea?style=for-the-badge" alt="Self-host the demo"></a>
 </p>
 
 <p align="center"><img src="docs/screenshots/hero.png" alt="Resurface landing page" width="100%"></p>
+
+## Hosted API (recommended)
+
+**Zero setup.** This repo is the open-source demo and reference implementation. To score real resumes, use **[Resurface API](https://getresurface.dev/?ref=github)**: sign up, create a key, send a job description and a resume file. There are no model keys to manage, no database to run and no PDF parsing to fix.
+
+```bash
+curl https://getresurface.dev/api/v1/score \
+  -H "Authorization: Bearer $RESURFACE_API_KEY" \
+  -F job_title="Data Engineer" \
+  -F job_description=@job.txt \
+  -F resume=@candidate.pdf
+```
+
+You get back a 0–100 score, a verdict for every screening question, and the resume line that proves each one. **50 scores free, then $0.10 per resume.** [API docs →](https://getresurface.dev/docs)
+
+| | Open-source demo (this repo) | **Resurface API** |
+|---|---|---|
+| Setup | Clone, add TypeSafe + LLM keys, deploy | **Sign up, copy a key** |
+| Your resumes | Basic import; RTL (Hebrew) PDFs often come out scrambled | **PDF, DOCX, HTML, TXT** with bidi-aware PDF extraction (Hebrew tested line-exact) |
+| Storage | JSON file in `/tmp`, single instance, resets on cold start | **Postgres**, per-account history and usage dashboard |
+| Questions | Drafted per job in the app | Drafted once and cached; reuse a rubric by `rubric_id` |
+| Access | One browser, no auth | **API keys**, rate limits, consistent error codes |
+| ATS integrations | None | Planned: Greenhouse, Ashby, JobAdder |
+| Cost | Your own TypeSafe + LLM bills, plus hosting | **50 free scores, then $0.10 per resume** |
+
+The method is the same in both: an LLM writes the questions once, and TypeSafe Jev answers them for every resume. This repo stays MIT-licensed and open.
 
 ## Launch video
 
@@ -115,7 +143,13 @@ More JEV patterns in this repo:
 - **Safety:** resumes are treated as untrusted input (a prompt-injection CV is included in the demo set), contact details are redacted before evaluation, and questions that touch protected attributes are flagged.
 - **Demo data:** 100 fictional resumes and 20 jobs, plus precomputed classifier results so a fresh deploy is never empty.
 
-## Run it
+## Run it yourself
+
+<p align="center">
+  <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fdolevhayut%2Fresurface&project-name=resurface&repository-name=resurface"><img src="https://vercel.com/button" alt="Deploy with Vercel"></a>
+</p>
+
+Prefer not to host anything? The [hosted API](https://getresurface.dev/?ref=github) runs the same pipeline with production file parsing and storage.
 
 ```bash
 pnpm install

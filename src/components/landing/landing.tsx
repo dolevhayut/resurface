@@ -1,4 +1,5 @@
 "use client";
+import { CLOUD_URL } from "@/lib/cloud";
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -413,6 +414,9 @@ function Nav() {
           <a href="#sheet" className="btn-ghost hidden sm:inline-flex">
             The comparison
           </a>
+          <a href={CLOUD_URL} className="btn-secondary hidden sm:inline-flex">
+            Hosted API
+          </a>
           <Link href="/overview" className="btn-primary">
             Open live demo <Icon name="arrowUpRight" className="size-3.5" />
           </Link>
@@ -469,6 +473,9 @@ function Hero({ bench, speed, cheaper }: { bench: Bench; speed: number; cheaper:
               Try it on 100 resumes
             </Link>
           </div>
+          <a href={CLOUD_URL} className="rise mt-4 inline-flex items-center gap-1.5 text-[13.5px] text-muted underline-offset-4 hover:text-pine hover:underline" style={{ animationDelay: "1.1s" }}>
+            Run it on your own resumes with the hosted API: nothing to deploy, 50 free scores <Icon name="arrowUpRight" className="size-3.5" />
+          </a>
           <div className="mt-10 flex flex-wrap gap-x-8 gap-y-3 font-mono text-[12px] text-muted">
             <span>
               <b className="text-[20px] font-semibold text-fg">{speed.toFixed(0)}×</b> faster
@@ -856,6 +863,9 @@ function Footer() {
             <Link href="/jobs/job_20" className="btn-secondary h-11 px-5 text-[14px]">
               Watch a job get screened live
             </Link>
+            <a href={CLOUD_URL} className="btn-secondary h-11 px-5 text-[14px]">
+              Use the hosted API <Icon name="arrowUpRight" className="size-3.5" />
+            </a>
           </div>
           <span className="font-mono text-[11px] text-faint">Resurface · working name · all people & companies in the demo are fictional</span>
         </div>

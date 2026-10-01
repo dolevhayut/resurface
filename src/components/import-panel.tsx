@@ -1,4 +1,5 @@
 "use client";
+import { CLOUD_URL } from "@/lib/cloud";
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import clsx from "clsx";
@@ -59,6 +60,10 @@ export function ImportPanel({ canImport, last }: { canImport: boolean; last: Sum
         </motion.div>
         <div className="mt-3 text-[13.5px] font-medium">{busy ? "Parsing & de-duplicating…" : "Drop resumes to import"}</div>
         <div className="mt-0.5 text-[12px] text-muted">PDF, DOCX, TXT, or CSV (name, email, headline, resume_text)</div>
+        <div className="mt-2 text-[11.5px] text-faint">
+          Demo parser. For production extraction (PDF, DOCX, HTML, Hebrew and other RTL) use the{" "}
+          <a href={CLOUD_URL} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()} className="text-pine underline underline-offset-2">hosted API</a>.
+        </div>
         {!canImport && <div className="mt-2 text-[12px] text-warn">Switch to Org admin to import</div>}
         {err && <div className="mt-2 text-[12px] text-bad">{err}</div>}
       </motion.label>

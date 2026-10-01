@@ -1,4 +1,5 @@
 "use client";
+import { CLOUD_URL } from "@/lib/cloud";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import clsx from "clsx";
@@ -67,6 +68,12 @@ export function Sidebar({ role, name, provider }: { role: string; name: string; 
           </AnimatedBackground>
         </nav>
         <div className="mt-auto space-y-2.5">
+          <a href={CLOUD_URL} target="_blank" rel="noreferrer" className="block rounded-2xl border border-line bg-surface p-3 transition-colors hover:border-pine">
+            <div className="flex items-center gap-1.5 text-[12px] font-medium">
+              Your own resumes? <Icon name="arrowUpRight" className="ml-auto size-3.5 text-pine" />
+            </div>
+            <div className="mt-0.5 text-[11px] leading-4 text-muted">Hosted API, nothing to deploy. 50 free scores.</div>
+          </a>
           <motion.button
             whileHover={{ y: -1 }}
             whileTap={{ scale: 0.97 }}
