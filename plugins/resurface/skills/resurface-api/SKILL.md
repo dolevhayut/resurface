@@ -75,6 +75,9 @@ Return a rubric's questions.
 ## GET /v1/usage
 Free and prepaid scores remaining (free_remaining, credits_remaining) and totals.
 
+## MCP server and Claude Code plugin
+MCP endpoint: https://getresurface.dev/api/mcp (Streamable HTTP). Send the same API key: `Authorization: Bearer rs_live_…`. Tools: `score_resume` (uses one score; job_description or rubric_id, and resume_text or resume_file_base64 with resume_filename), `draft_screening_questions` (free, returns a rubric id) and `get_usage` (free). In Claude Code, install the plugin with `/plugin marketplace add dolevhayut/resurface` and `/plugin install resurface@resurface`; it asks for the key once.
+
 ## Errors
 Errors are JSON: { "error": { "code", "message" } }.
 
