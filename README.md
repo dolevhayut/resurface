@@ -12,6 +12,10 @@
 </p>
 
 <p align="center">
+  <a href="https://www.producthunt.com/products/resurface-2?embed=true&amp;utm_source=badge-featured&amp;utm_medium=badge&amp;utm_campaign=badge-resurface-3" target="_blank" rel="noopener noreferrer"><img alt="Resurface - Score any resume against any job, with quoted evidence | Product Hunt" width="250" height="54" src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1266588&amp;theme=light&amp;t=1790924912085"></a>
+</p>
+
+<p align="center">
   <a href="https://getresurface.dev/?ref=github"><img src="https://img.shields.io/badge/Hosted%20API-50%20free%20scores%20%E2%86%92-1d5b44?style=for-the-badge" alt="Use the hosted Resurface API: 50 free scores"></a>
   &nbsp;
   <a href="#run-it-yourself"><img src="https://img.shields.io/badge/Self--host-the%20demo-f5f2ea?style=for-the-badge" alt="Self-host the demo"></a>
