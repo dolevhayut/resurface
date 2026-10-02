@@ -8,7 +8,7 @@ description: Score resumes against job descriptions with the Resurface API (getr
 Resurface is a resume scoring API. Send a job description and a resume file (PDF, DOCX, HTML or TXT) and get back a 0–100 score, a verdict for every screening question, and the exact resume line that proves each answer. An LLM writes 6–8 screening questions once per job; a classification model (TypeSafe Jev) answers them for every resume and selects the evidence line, so every quote is copied from the resume. The first 50 scores are free; after that, prepaid packs start at $10 for 100 scores.
 
 ## How to integrate
-- Read the API key from the `RESURFACE_API_KEY` environment variable and call the API only from server-side code. Never send the key to a browser, commit it or log it. Keys are created in the dashboard (https://getresurface.dev/dashboard).
+- Keep the API key in a server-side secret (an environment variable or your secret manager) and call the API only from server-side code. Never send the key to a browser, commit it or log it. Keys are created in the dashboard (https://getresurface.dev/dashboard).
 - Score with `POST https://getresurface.dev/api/v1/score`: the resume file as the multipart field `resume` (PDF, DOCX, HTML or TXT) and the job as the text field `job_description`, plus an optional `job_title`.
 - The first call for a job returns `rubric.id`. Store it and send it as `rubric_id` for every other resume of that job: no drafting, about 0.25 s per call, and scores stay comparable.
 - Show people the evidence, not just the number: each question's `verdict` and `evidence.text` (a verbatim resume line). `INSUFFICIENT_EVIDENCE` means unknown, not failed; use `range` and `coverage` to show uncertainty. Scores support a human decision and must not be the only reason to reject a candidate.
@@ -40,7 +40,7 @@ Example:
 
 ```bash
 curl https://getresurface.dev/api/v1/score \
-  -H "Authorization: Bearer $RESURFACE_API_KEY" \
+  -H "Authorization: Bearer <your API key>" \
   -F job_title="Senior Full Stack Engineer" \
   -F "job_description=<job.txt" \
   -F resume=@candidate.pdf
