@@ -46,7 +46,7 @@ npx skills add dolevhayut/resurface
 | | Open-source demo (this repo) | **Resurface API** |
 |---|---|---|
 | Setup | Clone, add TypeSafe + LLM keys, deploy | **Sign up, copy a key** |
-| Your resumes | Basic import; RTL (Hebrew) PDFs often come out scrambled | **PDF, DOCX, HTML, TXT** with bidi-aware PDF extraction (Hebrew tested line-exact) |
+| Your resumes | Basic import; mixed-direction and two-column PDFs often come out scrambled | **PDF, DOCX, HTML, TXT**, with two-column and mixed-direction PDFs extracted in reading order |
 | Storage | JSON file in `/tmp`, single instance, resets on cold start | **Postgres**, per-account history and usage dashboard |
 | Questions | Drafted per job in the app | Drafted once and cached; reuse a rubric by `rubric_id` |
 | Access | One browser, no auth | **API keys**, rate limits, consistent error codes |
@@ -143,7 +143,7 @@ More JEV patterns in this repo:
 
 ## What's inside
 
-- **Guided demo:** a narrated 10-step tour (Hebrew/English). A job with no candidates gets its questions drafted live, then 10 resumes stream through the classifier, each with a score.
+- **Guided demo:** a narrated 10-step tour. A job with no candidates gets its questions drafted live, then 10 resumes stream through the classifier, each with a score.
 - **Evidence-first results:** candidates are grouped into Strong evidence / Needs verification / Lower / Not evaluated. The evidence drawer jumps to each source line. Anything unproven turns into an interview check, and missing information never counts as a rejection.
 - **Ask the pool:** plain-language requests ("owned production on-call, even if not titled DevOps") are run against every resume.
 - **Reverse match:** check one resume against every open job.
