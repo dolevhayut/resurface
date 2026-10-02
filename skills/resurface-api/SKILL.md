@@ -5,7 +5,7 @@ description: Score resumes against job descriptions with the Resurface API (getr
 
 # Resurface API
 
-Resurface is a resume scoring API. Send a job description and a resume file (PDF, DOCX, HTML or TXT) and get back a 0–100 score, a verdict for every screening question, and the exact resume line that proves each answer. An LLM writes 6–8 screening questions once per job; a classification model (TypeSafe Jev) answers them for every resume and selects the evidence line, so quotes are copied from the resume, never generated. The first 50 scores are free; after that, prepaid packs start at $10 for 100 scores.
+Resurface is a resume scoring API. Send a job description and a resume file (PDF, DOCX, HTML or TXT) and get back a 0–100 score, a verdict for every screening question, and the exact resume line that proves each answer. An LLM writes 6–8 screening questions once per job; a classification model (TypeSafe Jev) answers them for every resume and selects the evidence line, so every quote is copied from the resume. The first 50 scores are free; after that, prepaid packs start at $10 for 100 scores.
 
 ## How to integrate
 - Read the API key from the `RESURFACE_API_KEY` environment variable and call the API only from server-side code. Never send the key to a browser, commit it or log it. Keys are created in the dashboard (https://getresurface.dev/dashboard).
