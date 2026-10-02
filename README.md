@@ -16,16 +16,16 @@
 </p>
 
 <p align="center">
-  <a href="https://getresurface.dev/?ref=github"><img src="https://img.shields.io/badge/Hosted%20API-50%20free%20scores%20%E2%86%92-1d5b44?style=for-the-badge" alt="Use the hosted Resurface API: 50 free scores"></a>
+  <a href="https://getresurface.dev/?ref=github"><img src="https://img.shields.io/badge/Resurface%20Cloud-50%20free%20scores%20%E2%86%92-1d5b44?style=for-the-badge" alt="Use Resurface Cloud: 50 free scores"></a>
   &nbsp;
-  <a href="#run-it-yourself"><img src="https://img.shields.io/badge/Self--host-the%20demo-f5f2ea?style=for-the-badge" alt="Self-host the demo"></a>
+  <a href="#run-it-yourself"><img src="https://img.shields.io/badge/Open%20source-self--host-f5f2ea?style=for-the-badge" alt="Self-host the open source"></a>
 </p>
 
 <p align="center"><img src="docs/screenshots/hero.png" alt="Resurface landing page" width="100%"></p>
 
-## Hosted API (recommended)
+## Resurface Cloud (recommended)
 
-**Zero setup.** This repo is the open-source demo and reference implementation. To score real resumes, use **[Resurface API](https://getresurface.dev/?ref=github)**: sign up, create a key, send a job description and a resume file. There are no model keys to manage, no database to run and no PDF parsing to fix.
+**Zero setup.** This repo is the open-source version: the full method, to run yourself. To score real resumes without running anything, use **[Resurface Cloud](https://getresurface.dev/?ref=github)**, the hosted API: sign up, create a key, send a job description and a resume file. There are no model keys to manage, no database to run and no PDF parsing to fix.
 
 ```bash
 curl https://getresurface.dev/api/v1/score \
@@ -43,7 +43,7 @@ You get back a 0–100 score, a verdict for every screening question, and the re
 npx skills add dolevhayut/resurface
 ```
 
-| | Open-source demo (this repo) | **Resurface API** |
+| | Open source (this repo) | **Resurface Cloud** |
 |---|---|---|
 | Setup | Clone, add TypeSafe + LLM keys, deploy | **Sign up, copy a key** |
 | Your resumes | Basic import; mixed-direction and two-column PDFs often come out scrambled | **PDF, DOCX, HTML, TXT**, with two-column and mixed-direction PDFs extracted in reading order |
@@ -141,15 +141,15 @@ More JEV patterns in this repo:
 
 ## What's inside
 
-- **Guided demo:** a narrated 10-step tour. A job with no candidates gets its questions drafted live, then 10 resumes stream through the classifier, each with a score.
+- **Guided tour:** a narrated 10-step walkthrough. A job with no candidates gets its questions drafted live, then 10 resumes stream through the classifier, each with a score.
 - **Evidence-first results:** candidates are grouped into Strong evidence / Needs verification / Lower / Not evaluated. The evidence drawer jumps to each source line. Anything unproven turns into an interview check, and missing information never counts as a rejection.
 - **Ask the pool:** plain-language requests ("owned production on-call, even if not titled DevOps") are run against every resume.
 - **Reverse match:** check one resume against every open job.
 - **Runs:** frozen rubric versions and candidate snapshots, staged cascade for larger rubrics, retries with backoff, pause/resume/cancel, budget cap, idempotency keys.
 - **Import:** PDF, DOCX, TXT and CSV, with de-duplication by content hash and versioning by email.
 - **Recruiter tools:** shortlists, compare up to 3, CSV export, roles (admin / recruiter / hiring manager), audit log, usage metering.
-- **Safety:** resumes are treated as untrusted input (a prompt-injection CV is included in the demo set), contact details are redacted before evaluation, and questions that touch protected attributes are flagged.
-- **Demo data:** 100 fictional resumes and 20 jobs, plus precomputed classifier results so a fresh deploy is never empty.
+- **Safety:** resumes are treated as untrusted input (a prompt-injection CV is included in the sample set), contact details are redacted before evaluation, and questions that touch protected attributes are flagged.
+- **Sample data:** 100 fictional resumes and 20 jobs, plus precomputed classifier results so a fresh deploy is never empty.
 
 ## Run it yourself
 
@@ -157,7 +157,7 @@ More JEV patterns in this repo:
   <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fdolevhayut%2Fresurface&project-name=resurface&repository-name=resurface"><img src="https://vercel.com/button" alt="Deploy with Vercel"></a>
 </p>
 
-Prefer not to host anything? The [hosted API](https://getresurface.dev/?ref=github) runs the same pipeline with production file parsing and storage.
+Prefer not to host anything? [Resurface Cloud](https://getresurface.dev/?ref=github) runs the same pipeline with production file parsing and storage.
 
 ```bash
 pnpm install
@@ -170,16 +170,16 @@ pnpm dev                     # http://localhost:3000 → landing; /overview → 
 | `TYPESAFE_API_KEY` | Live evaluation with TypeSafe **JEV** ([docs](https://docs.typesafe.ai)). Without it, an offline keyword heuristic is used, and labelled as such everywhere. |
 | `ANTHROPIC_API_KEY` or `AI_GATEWAY_API_KEY` | Live LLM drafting of questions for new jobs. Without it, the classifier marks each job-description line as must / nice / not a requirement instead. |
 
-No key is required to deploy: the demo ships with real precomputed results for 19 jobs.
+No key is required to deploy: the app ships with real precomputed results for 19 jobs.
 
-**Scripts:** `pnpm seed` regenerates demo data · `pnpm snapshot` bakes completed runs into the seed · `pnpm benchmark` re-runs the model comparison (needs both keys).
+**Scripts:** `pnpm seed` regenerates the sample data · `pnpm snapshot` bakes completed runs into the seed · `pnpm benchmark` re-runs the model comparison (needs both keys).
 
 ### Deploy notes
-The Vercel deployment is a **single-instance demo**: state lives in `/tmp` and resets on a cold start, and run progress is driven by the polling requests. For production, swap the JSON store for Postgres and the in-process worker for a durable queue. The store's entity shapes already mirror that design (`src/lib/types.ts`).
+A Vercel deployment of this repo is **single-instance**: state lives in `/tmp` and resets on a cold start, and run progress is driven by the polling requests. For production, swap the JSON store for Postgres and the in-process worker for a durable queue. The store's entity shapes already mirror that design (`src/lib/types.ts`).
 
 ## Stack
 Next.js 16 · React 19 · Tailwind v4 · motion · Phosphor icons · `@typesafe-ai/sdk` · AI SDK · Anthropic.
 Motion primitives adapted from [21st.dev](https://21st.dev) (ibelick, cnippet-dev). Imagery and logo generated with fal (Nano Banana 2).
 
 ## License
-MIT. All people and companies in the demo data are fictional.
+MIT. All people and companies in the sample data are fictional.
