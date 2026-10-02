@@ -68,16 +68,14 @@ Screening a resume against a job is a **decision**, not an essay. We ran the sam
 | | **TypeSafe JEV** (classifier) | Claude Sonnet 5.5 | Claude Haiku 4.5 |
 |---|---|---|---|
 | Median time per resume | **0.29 s** | 2.5 s | 1.7 s |
-| Cost per resume | **$0.00018** | $0.0057 (31×) | $0.0019 (10×) |
 | Verdicts identical to Sonnet 5.5 | **99%** | — | 93% |
 | Same answer on a re-run | **100%** | 100% | 98% |
-| 185,000 resumes × 20 jobs | **≈ $680** | ≈ $21,000 | ≈ $7,100 |
 | Output | one of *your* options, plus a probability | generated text / JSON | generated text / JSON |
 | Evidence | picks a resume line ID, so the quote is copied and can't be invented | writes the quote | writes the quote |
 
 **New challenger:** on 29 Sep 2026 OpenAI announced a *Decisions API* built on GPT-6 Luna (limited preview, ~150 ms claimed). It has no public endpoint, schema or pricing yet, so it isn't in the table. It will be added the day it can be measured with the same script.
 
-On this sample the LLMs were accurate too. The difference is cost, speed, and guarantees that come from the design instead of from verification. LLMs still do the part they're best at here: turning a job post into 6–8 atomic questions, once per job. *A small synthetic benchmark: directional, not a certification.*
+On this sample the LLMs were accurate too. The difference is speed, and guarantees that come from the design instead of from verification. LLMs still do the part they're best at here: turning a job post into 6–8 atomic questions, once per job. *A small synthetic benchmark: directional, not a certification.*
 
 ## How it works
 
