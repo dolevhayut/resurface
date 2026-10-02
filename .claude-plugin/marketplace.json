@@ -1,0 +1,17 @@
+{
+  "name": "resurface",
+  "description": "Resurface for Claude: score resumes against a job with quoted evidence.",
+  "owner": {
+    "name": "Resurface",
+    "url": "https://getresurface.dev"
+  },
+  "plugins": [
+    {
+      "name": "resurface",
+      "source": "./plugins/resurface",
+      "description": "Score resumes against a job description: a 0–100 score, a verdict per screening question and the exact resume line behind each one. MCP server plus skills.",
+      "category": "productivity",
+      "tags": ["recruiting", "hiring", "resume", "screening", "mcp"]
+    }
+  ]
+}

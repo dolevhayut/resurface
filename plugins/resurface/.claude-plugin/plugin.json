@@ -1,0 +1,38 @@
+{
+  "name": "resurface",
+  "displayName": "Resurface",
+  "version": "1.0.0",
+  "description": "Score resumes against a job description from Claude: a 0–100 score, a verdict for every screening question and the exact resume line behind each one. Includes the Resurface MCP server and skills for screening candidates and for building the Resurface API into your own product.",
+  "author": {
+    "name": "Resurface",
+    "email": "office@bulldog-adv.com",
+    "url": "https://getresurface.dev"
+  },
+  "homepage": "https://getresurface.dev/docs#claude",
+  "repository": "https://github.com/dolevhayut/resurface",
+  "license": "MIT",
+  "keywords": ["recruiting", "hiring", "resume", "screening", "ats", "hr", "candidates", "mcp"],
+  "icon": "./logo.png",
+  "documentationUrl": "https://getresurface.dev/docs#claude",
+  "supportUrl": "https://github.com/dolevhayut/resurface/issues",
+  "privacyPolicyUrl": "https://getresurface.dev/privacy",
+  "termsOfServiceUrl": "https://getresurface.dev/terms",
+  "mcpServers": {
+    "resurface": {
+      "type": "http",
+      "url": "https://getresurface.dev/api/mcp",
+      "headers": {
+        "Authorization": "Bearer ${user_config.api_key}"
+      }
+    }
+  },
+  "userConfig": {
+    "api_key": {
+      "type": "string",
+      "title": "Resurface API key",
+      "description": "Your API key (rs_live_…). Create one for free at https://getresurface.dev/dashboard; the first 50 scores are free.",
+      "required": true,
+      "sensitive": true
+    }
+  }
+}

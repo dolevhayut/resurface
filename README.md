@@ -43,6 +43,15 @@ You get back a 0–100 score, a verdict for every screening question, and the re
 npx skills add dolevhayut/resurface
 ```
 
+**Using Claude Code?** Install the Resurface plugin: the MCP server (`score_resume`, `draft_screening_questions`, `get_usage`) plus skills for screening candidates and for building the API into your product ([source](plugins/resurface)). It asks for your API key once.
+
+```
+/plugin marketplace add dolevhayut/resurface
+/plugin install resurface@resurface
+```
+
+Other MCP clients connect to `https://getresurface.dev/api/mcp` with `Authorization: Bearer <your key>`.
+
 | | Open source (this repo) | **Resurface Cloud** |
 |---|---|---|
 | Setup | Clone, add TypeSafe + LLM keys, deploy | **Sign up, copy a key** |
