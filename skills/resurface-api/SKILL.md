@@ -63,6 +63,7 @@ Response fields:
 | rubric | object | { id, source, questions }. Reuse rubric.id to score more resumes for the same job. |
 | resume | object | { lines, language }. |
 | billing | object | { billable, price_usd, free_remaining, credits_remaining }. credits_remaining is the prepaid balance. Also in the X-Resurface-Free-Remaining and X-Resurface-Credits-Remaining headers. |
+| model | string | The decision model that answered, for example jev-1.13.0, or clef-flash when the fallback answered. |
 | latency_ms | number | Server time for this call. A new job description adds a few seconds for drafting; reused rubrics take about 0.25 s. |
 
 ## POST /v1/rubrics
