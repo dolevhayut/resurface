@@ -5,7 +5,7 @@ description: Score resumes against job descriptions with the Resurface API (getr
 
 # Resurface API
 
-Resurface is a resume scoring API. Send a job description and a resume file (PDF, DOCX, HTML or TXT) and get back a 0–100 score, a verdict for every screening question, and the exact resume line that proves each answer. An LLM writes 6–8 screening questions once per job; a classification model (TypeSafe Jev) answers them for every resume and selects the evidence line, so quotes are copied from the resume, never generated. The first 50 scores are free, then $0.10 per resume.
+Resurface is a resume scoring API. Send a job description and a resume file (PDF, DOCX, HTML or TXT) and get back a 0–100 score, a verdict for every screening question, and the exact resume line that proves each answer. An LLM writes 6–8 screening questions once per job; a classification model (TypeSafe Jev) answers them for every resume and selects the evidence line, so quotes are copied from the resume, never generated. The first 50 scores are free; after that, prepaid packs start at $10 for 100 scores.
 
 ## How to integrate
 - Read the API key from the `RESURFACE_API_KEY` environment variable and call the API only from server-side code. Never send the key to a browser, commit it or log it. Keys are created in the dashboard (https://getresurface.dev/dashboard).
@@ -60,7 +60,7 @@ Response fields:
 | questions[].probabilities | object | Calibrated probability per verdict. |
 | rubric | object | { id, source, questions }. Reuse rubric.id to score more resumes for the same job. |
 | resume | object | { lines, language }. |
-| billing | object | { billable, price_usd, free_remaining }. Also in the X-Resurface-Free-Remaining header. |
+| billing | object | { billable, price_usd, free_remaining, credits_remaining }. credits_remaining is the prepaid balance. Also in the X-Resurface-Free-Remaining and X-Resurface-Credits-Remaining headers. |
 | latency_ms | number | Server time for this call. A new job description adds a few seconds for drafting; reused rubrics take about 0.25 s. |
 
 ## POST /v1/rubrics
@@ -70,7 +70,7 @@ Draft screening questions from { job_title, job_description } (JSON) without sco
 Return a rubric's questions.
 
 ## GET /v1/usage
-Free scores remaining, totals and amount due.
+Free and prepaid scores remaining (free_remaining, credits_remaining) and totals.
 
 ## Errors
 Errors are JSON: { "error": { "code", "message" } }.
@@ -79,11 +79,11 @@ Errors are JSON: { "error": { "code", "message" } }.
 |---|---|---|
 | 400 | invalid_request | Missing job or resume, or an unreadable file. |
 | 401 | missing_api_key / invalid_api_key | Missing, invalid or revoked key. |
-| 402 | free_tier_exhausted | The 50 free scores are used up and billing isn't enabled. |
+| 402 | free_tier_exhausted | No free or prepaid scores left. Buy a score pack in the dashboard. |
 | 404 | not_found | Unknown rubric_id. |
 | 413 / 415 | invalid_request | File over 5 MB, or an unsupported type such as legacy .doc. |
 | 429 | rate_limited / draft_rate_limited | Over 60 scores per minute, or over 30 new job descriptions per hour. |
 | 502 | evaluator_unavailable | Scoring failed; the free credit is refunded automatically. |
 
 ## Pricing and limits
-50 free scores per account, then $0.10 per scored resume. Drafting questions is free. 60 scores per minute per developer.
+50 free scores per account, then prepaid score packs: 100 scores for $10, 500 for $40, 2,500 for $150 (bought in the dashboard, used after the free scores). Drafting questions is free. 60 scores per minute per developer.
