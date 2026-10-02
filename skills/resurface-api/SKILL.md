@@ -1,11 +1,11 @@
 ---
 name: resurface-api
-description: Score resumes against job descriptions with the Resurface API (getresurface.dev), which returns a 0–100 score, a verdict for each screening question and the verbatim resume line that proves it, for PDF, DOCX, HTML or TXT resumes in English or Hebrew. Use when writing or debugging code that calls the Resurface API, or when the user wants to screen, rank or rediscover candidates against a job with it.
+description: Score resumes against job descriptions with the Resurface API (getresurface.dev), which returns a 0–100 score, a verdict for each screening question and the verbatim resume line that proves it, for PDF, DOCX, HTML or TXT resumes. Use when writing or debugging code that calls the Resurface API, or when the user wants to screen, rank or rediscover candidates against a job with it.
 ---
 
 # Resurface API
 
-Resurface is a resume scoring API. Send a job description and a resume file (PDF, DOCX, HTML or TXT, in Hebrew or English) and get back a 0–100 score, a verdict for every screening question, and the exact resume line that proves each answer. An LLM writes 6–8 screening questions once per job; a classification model (TypeSafe Jev) answers them for every resume and selects the evidence line, so quotes are copied from the resume, never generated. The first 50 scores are free, then $0.10 per resume.
+Resurface is a resume scoring API. Send a job description and a resume file (PDF, DOCX, HTML or TXT) and get back a 0–100 score, a verdict for every screening question, and the exact resume line that proves each answer. An LLM writes 6–8 screening questions once per job; a classification model (TypeSafe Jev) answers them for every resume and selects the evidence line, so quotes are copied from the resume, never generated. The first 50 scores are free, then $0.10 per resume.
 
 ## How to integrate
 - Read the API key from the `RESURFACE_API_KEY` environment variable and call the API only from server-side code. Never send the key to a browser, commit it or log it. Keys are created in the dashboard (https://getresurface.dev/dashboard).
