@@ -34,6 +34,8 @@ Score one resume against a job. Accepts `multipart/form-data` (for files) or JSO
 | rubric_id | string | Reuse the questions of a previous score or of POST /v1/rubrics. |
 | questions | array | Bring your own questions: strings, or objects { question, requirement: "must" or "nice", weight, min_years }. Max 12. |
 
+Optional header `Idempotency-Key`: a unique value per resume. Repeating a request with the same key within 24 hours returns the original result (with `Idempotent-Replayed: true`) instead of scoring and charging again.
+
 Example:
 
 ```bash
@@ -83,7 +85,9 @@ Errors are JSON: { "error": { "code", "message" } }.
 | 404 | not_found | Unknown rubric_id. |
 | 413 / 415 | invalid_request | File over 5 MB, or an unsupported type such as legacy .doc. |
 | 429 | rate_limited / draft_rate_limited | Over 60 scores per minute, or over 30 new job descriptions per hour. |
-| 502 | evaluator_unavailable | Scoring failed; the free credit is refunded automatically. |
+| 409 | idempotency_key_in_use | A request with the same Idempotency-Key is still running. |
+| 502 | evaluator_unavailable | Scoring failed; the score is refunded automatically. |
+| 504 | evaluator_timeout | Scoring took too long; the score is refunded automatically. Safe to retry. |
 
 ## Pricing and limits
 50 free scores per account, then prepaid score packs: 100 scores for $10, 500 for $40, 2,500 for $150 (bought in the dashboard, used after the free scores). Drafting questions is free. 60 scores per minute per developer.
