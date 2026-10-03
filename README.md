@@ -43,7 +43,7 @@ You get back a 0–100 score, a verdict for every screening question, and the re
 npx skills add dolevhayut/resurface
 ```
 
-**Using Claude Code?** Install the Resurface plugin: the MCP server (`score_resume`, `draft_screening_questions`, `get_usage`) plus skills for screening candidates and for building the API into your product ([source](plugins/resurface)). It asks for your API key once.
+**Using Claude?** Resurface is in [Claude's plugin directory](https://claude.ai/customize/plugins/id/4edbebe7-6adf-4ffd-950e-38589782d999%40anthropic-plugin-directory) (Customize → Plugins → search Resurface). In Claude Code you can also install the plugin: the MCP server (`score_resume`, `draft_screening_questions`, `get_usage`) plus skills for screening candidates and for building the API into your product ([source](plugins/resurface)). It asks for your API key once.
 
 ```
 /plugin marketplace add dolevhayut/resurface
