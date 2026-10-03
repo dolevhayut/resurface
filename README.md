@@ -43,14 +43,14 @@ You get back a 0–100 score, a verdict for every screening question, and the re
 npx skills add dolevhayut/resurface
 ```
 
-**Using Claude?** Resurface is in [Claude's plugin directory](https://claude.ai/customize/plugins/id/4edbebe7-6adf-4ffd-950e-38589782d999%40anthropic-plugin-directory) (Customize → Plugins → search Resurface). In Claude Code you can also install the plugin: the MCP server (`score_resume`, `draft_screening_questions`, `get_usage`) plus skills for screening candidates and for building the API into your product ([source](plugins/resurface)). It asks for your API key once.
+**Using Claude?** Resurface is in [Claude's plugin directory](https://claude.ai/customize/plugins/id/4edbebe7-6adf-4ffd-950e-38589782d999%40anthropic-plugin-directory) (Customize → Plugins → search Resurface). In Claude Code you can also install the plugin: the MCP server (`score_resume`, `draft_screening_questions`, `get_usage`) plus skills for screening candidates and for building the API into your product ([source](plugins/resurface)). It asks you to sign in to Resurface once; there is no key to copy.
 
 ```
 /plugin marketplace add dolevhayut/resurface
 /plugin install resurface@resurface
 ```
 
-Other MCP clients connect to `https://getresurface.dev/api/mcp` with `Authorization: Bearer <your key>`.
+Other MCP clients connect to `https://getresurface.dev/api/mcp` and sign in with a Resurface account (OAuth), or send `Authorization: Bearer <your key>`.
 
 | | Open source (this repo) | **Resurface Cloud** |
 |---|---|---|

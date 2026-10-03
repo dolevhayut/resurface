@@ -22,13 +22,21 @@ In Claude Code:
 /plugin install resurface@resurface
 ```
 
-Claude Code asks for your Resurface API key when the plugin is enabled. Create a key for free at https://getresurface.dev/dashboard. The first 50 scores are free; after that, prepaid packs start at $10 for 100 scores. The key is stored in your system's secure credential storage, not in a settings file.
+In Claude, you can also add it from Customize → Plugins (search for Resurface).
+
+The first time Claude uses a Resurface tool, it asks you to sign in with your Resurface account (Google, GitHub or email; the same account as https://getresurface.dev/dashboard). There is no key to copy. A new account starts with 50 free scores; after that, prepaid packs start at $10 for 100 scores. In Claude Code you can also sign in from `/mcp` → `resurface` → Authenticate.
+
+Prefer an API key, for example in CI or scripts? Skip the plugin's server and add it yourself:
+
+```
+claude mcp add --transport http resurface https://getresurface.dev/api/mcp --header "Authorization: Bearer rs_live_…"
+```
 
 Then ask, for example: "Rank the resumes in ./candidates against this job description."
 
 ## What the plugin sends, and where
 
-- The plugin calls one service: `https://getresurface.dev/api/mcp`, with your API key in the `Authorization` header.
+- The plugin calls one service: `https://getresurface.dev/api/mcp`. You sign in through OAuth (Resurface uses Clerk for accounts); Claude stores the access token, and the plugin itself holds no credentials.
 - When you score, it sends the job description and the resume text (or the file, if you ask for that) to Resurface.
 - Resurface reads the resume in memory and does not store the file or its full text. It keeps a hash of the resume and the result, including the short quoted lines. Job descriptions and their questions are saved as a rubric in your account.
 - Resurface uses TypeSafe (the Jev model) to answer the questions, Cloudflare Workers AI as an automatic fallback, and Anthropic to draft questions from the job description. Full details: https://getresurface.dev/privacy

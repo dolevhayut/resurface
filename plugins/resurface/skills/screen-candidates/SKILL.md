@@ -28,5 +28,5 @@ The Resurface MCP server scores one resume against one job per call. Each call r
 ## Errors
 
 - `402`: the free scores are used up. Tell the user to buy a pack at https://getresurface.dev/dashboard.
-- `401`: the API key in the plugin settings is missing or wrong. Keys are created at https://getresurface.dev/dashboard.
+- `401` or a sign-in prompt: the Resurface connection isn't signed in, or the session expired. Ask the user to sign in again (in Claude Code: `/mcp` → `resurface` → Authenticate).
 - `429`: too many requests. Wait a few seconds and continue.

@@ -76,7 +76,7 @@ Return a rubric's questions.
 Free and prepaid scores remaining (free_remaining, credits_remaining) and totals.
 
 ## MCP server and Claude Code plugin
-MCP endpoint: https://getresurface.dev/api/mcp (Streamable HTTP). Send the same API key: `Authorization: Bearer rs_live_…`. Tools: `score_resume` (uses one score; job_description or rubric_id, and resume_text or resume_file_base64 with resume_filename), `draft_screening_questions` (free, returns a rubric id) and `get_usage` (free). In Claude Code, install the plugin with `/plugin marketplace add dolevhayut/resurface` and `/plugin install resurface@resurface`; it asks for the key once.
+MCP endpoint: https://getresurface.dev/api/mcp (Streamable HTTP). MCP clients sign in with a Resurface account through OAuth: the endpoint answers 401 with `resource_metadata` pointing to https://getresurface.dev/.well-known/oauth-protected-resource/api/mcp, and the authorization server is https://clerk.getresurface.dev. Scripts and CI can send an API key instead: `Authorization: Bearer rs_live_…`. Tools: `score_resume` (uses one score; job_description or rubric_id, and resume_text or resume_file_base64 with resume_filename), `draft_screening_questions` (free, returns a rubric id) and `get_usage` (free). The Resurface plugin is in Claude's plugin directory (Customize → Plugins → search Resurface). In Claude Code you can also install it with `/plugin marketplace add dolevhayut/resurface` and `/plugin install resurface@resurface`. It asks you to sign in once.
 
 ## Errors
 Errors are JSON: { "error": { "code", "message" } }.
